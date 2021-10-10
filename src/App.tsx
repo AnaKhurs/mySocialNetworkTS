@@ -2,11 +2,15 @@ import React from 'react';
 import './App.css';
 import Accordion from "./components/Accordion/Accordion";
 import {Rating} from "./components/Rating/Rating";
+import {Technologies} from "./components/Technologies/Technologies";
+import {Header} from "./components/Header/Header";
 
 function App() {
     console.log('App rendering')
   return (
     <div>
+        <Header />
+        <Technologies />
         <PageTitle title={"This is APP component"}/>
         <PageTitle title={"My friends"}/>
         <Rating value = {3}/>
@@ -21,6 +25,7 @@ function App() {
     </div>
   );
 }
+
 
 
 type PageTitlePropsType = {
