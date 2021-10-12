@@ -1,9 +1,4 @@
 
-.content {
-    grid-area: c;
-    background: darkgray;
-}
-
-.content img {
+. img {
     width: 100%;
 }
