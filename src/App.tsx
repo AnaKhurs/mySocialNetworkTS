@@ -1,41 +1,52 @@
 import React from 'react';
 import './App.css';
-import Accordion from "./components/Accordion/Accordion";
-import {Rating} from "./components/Rating/Rating";
-import {Technologies} from "./components/Technologies/Technologies";
-import {Header} from "./components/Header/Header";
+
 
 function App() {
     console.log('App rendering')
-  return (
-    <div>
-        <Header />
-        <Technologies />
-        <PageTitle title={"This is APP component"}/>
-        <PageTitle title={"My friends"}/>
-        <Rating value = {3}/>
-        <Accordion titleValue = {"Menu"} collapsed = {true} />
-        <Accordion titleValue = {"Users"} collapsed = {false} />
-        <Rating value = {0}/>
-        <Rating value = {1}/>
-        <Rating value = {2}/>
-        <Rating value = {3}/>
-        <Rating value = {4}/>
-        <Rating value = {5}/>
-    </div>
-  );
+    return (
+        <div className='app-wrapper'>
+            <header className='header'>
+                <img
+                    src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPHRvtFUvNT9Rrpz2HE4gu05hPPg8m7DweCg&usqp=CAU'/>
+            </header>
+            <nav className='nav'>
+                <div><a>Profile</a></div>
+                <div><a>Messages</a></div>
+                <div><a>News</a></div>
+                <div><a>Music</a></div>
+                <div><a>Settings</a></div>
+
+            </nav>
+            <div className='content'>
+                <div>
+                    <img src='https://www.tourdom.ru/upload/iblock/c67/c67d37818296f908f1ba70503667e48c.jpeg'/>
+                </div>
+                <div>
+                    ava+description
+                </div>
+                <div>
+                    my posts
+                    <div>
+                        New post
+                    </div>
+                    <div>
+                        <div>
+                            post1
+                        </div>
+                        <div>
+                            post2
+                        </div>
+                        <div>
+                            post3
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    );
 }
 
 
-
-type PageTitlePropsType = {
-    title: string
-}
-
-function PageTitle(props: PageTitlePropsType){
-    debugger
-    console.log('PageTitle rendering')
-    return <h1>{props.title}</h1>
-}
-
-export default App;
+    export default App;
