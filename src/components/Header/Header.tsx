@@ -1,7 +1,7 @@
 import React from 'react';
 import classes from './Header.module.css';
 
-const Header = () => {
+function Header() {
     return (
         <header className={classes.header}>
             <img

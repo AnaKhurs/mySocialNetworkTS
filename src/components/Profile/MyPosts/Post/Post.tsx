@@ -6,7 +6,7 @@ type PostType = {
     likecounte: number
 }
 
-const Post = (props: PostType) => {
+function Post(props: PostType) {
     return (
         <div className={classes.item}>
             <img src='https://cdn.pixabay.com/photo/2015/03/03/08/55/portrait-657116__340.jpg'/>
