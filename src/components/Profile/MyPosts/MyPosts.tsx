@@ -4,21 +4,25 @@ import Post from "./Post/Post";
 
 const MyPosts = () => {
     return (
-        <div>
-            My Posts
+        <div className={classes.allPosts}>
+            <h3>My Posts</h3>
             <div>
-                <textarea></textarea>
-                <button>Add post</button>
+                <div>
+                    <textarea></textarea>
+                </div>
+                <div>
+                    <button>Add post</button>
+                </div>
             </div>
             <div className={classes.posts}>
                 <Post message="Hi, how are you?" likecounte={18}/>
                 <Post message="It is my first post!!!" likecounte={19}/>
-                <Post message="Yoooo"likecounte={10}/>
+                <Post message="Yoooo" likecounte={10}/>
 
-</div>
-</div>
+            </div>
+        </div>
 
-)
+    )
 }
 
 export default MyPosts;
