@@ -1,0 +1,25 @@
+.content {
+    display: grid;
+    grid-template-columns: 20fr 80fr;
+}
+
+
+.dialogs {
+padding: 10px;
+    background-color: olivedrab;
+    /*text-decoration: none;*/
+}
+
+.dialog {
+    padding: 5px;
+}
+.dialogs .active{
+    color: gold;
+}
+.messages {
+    padding: 20px;
+}
+
+.message {
+    padding: 1px;
+}
