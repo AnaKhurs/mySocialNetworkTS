@@ -3,30 +3,44 @@ import classes from './Dialogs.module.css';
 import {NavLink} from "react-router-dom";
 
 
+type DialogItemType = {
+    id: string
+    name: string
+}
+
+const DialogItem: React.FC<DialogItemType> = (props) => {
+    let path = '/dialogs/' + props.id
+    return (
+        <div className={classes.dialog}>
+            <NavLink to={path}>{props.name}</NavLink>
+        </div>
+    )
+}
+
+type MessegeItemType = {
+    messageText: string
+}
+
+const MessageItem: React.FC<MessegeItemType> = (props) => {
+    return (
+        <div className={classes.message}>{props.messageText}</div>
+    )
+}
+
 const Dialogs = () => {
     return (
         <div className={classes.content}>
             <div className={classes.dialogs}>
-                <div className={classes.dialog + " " + classes.active}>
-                   <NavLink to='/dialogs/1'>Nastya</NavLink>
-                </div>
-                <div className={classes.dialog}>
-                    <NavLink to='/dialogs/2'>Alex</NavLink>
-                    </div>
-                <div className={classes.dialog}>
-                    <NavLink to='/dialogs/3'>Masha</NavLink>
-                    </div>
-                <div className={classes.dialog}>
-                    <NavLink to='/dialogs/4'>Lena</NavLink>
-                    </div>
-                <div className={classes.dialog}>
-                    <NavLink to='/dialogs/5'>Dima</NavLink>
-                    </div>
+                <DialogItem id="1" name="Nastya"/>
+                <DialogItem id="2" name="Alex"/>
+                <DialogItem id="3" name="Masha"/>
+                <DialogItem id="4" name="Dima"/>
+                <DialogItem id="5" name="Lena"/>
             </div>
             <div className={classes.messages}>
-                <div className={classes.message}>Hi</div>
-                <div className={classes.message}>How are you?</div>
-                <div className={classes.message}>Yooo</div>
+                <MessageItem messageText="Hi!!!"/>
+                <MessageItem messageText="How are you?"/>
+                <MessageItem messageText="yoooooo"/>
             </div>
         </div>
     )
