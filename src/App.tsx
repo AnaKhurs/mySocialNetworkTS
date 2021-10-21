@@ -8,9 +8,15 @@ import {BrowserRouter, Route} from "react-router-dom";
 import Music from "./components/Music/Music";
 import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
+import {DialogType, MessageTextType, PostType} from "./index";
 
+type AppType = {
+    dialogs: Array<DialogType>
+    messagesText: Array<MessageTextType>
+    posts: Array<PostType>
+}
 
-function App() {
+function App(props:AppType) {
     console.log('App rendering')
     return (
         <BrowserRouter>
@@ -18,11 +24,11 @@ function App() {
                 <Header/>
                 <Navbar/>
                 <div className='app-wrapper-content'>
-                    <Route path='/dialogs' component = {Dialogs} />
-                    <Route path='/profile' component = {Profile} />
-                    <Route path='/news' component = {News} />
-                    <Route path='/music' component = {Music} />
-                    <Route path='/settings' component = {Settings} />
+                    <Route path='/dialogs' render={() => <Dialogs dialogs={props.dialogs} messagesText={props.messagesText}/>}/>
+                    <Route path='/profile' render={() => <Profile posts={props.posts}/>}/>
+                    <Route path='/news' render={() => <News/>}/>
+                    <Route path='/music' render={() => <Music/>}/>
+                    <Route path='/settings' render={() => <Settings/>}/>
                 </div>
             </div>
         </BrowserRouter>

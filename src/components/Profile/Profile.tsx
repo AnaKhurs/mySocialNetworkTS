@@ -2,12 +2,17 @@ import React from 'react';
 import classes from './Profile.module.css'
 import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
+import {PostType} from "../../index";
 
-const Profile = () => {
+type ProfileType = {
+    posts:Array<PostType>
+}
+
+const Profile:React.FC<ProfileType> = (posts) => {
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts/>
+            <MyPosts posts={posts.posts}/>
         </div>
     )
 }
