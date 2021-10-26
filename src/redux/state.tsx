@@ -1,6 +1,7 @@
 export type DialogType = {
     id: number
     name: string
+    avatar: string
 }
 
 export type MessageTextType = {
@@ -38,11 +39,31 @@ const state = {
     },
     dialogPage: {
         dialogs: [
-            {id: 1, name: "Nastya"},
-            {id: 2, name: "Alex"},
-            {id: 3, name: "Masha"},
-            {id: 4, name: "Dima"},
-            {id: 5, name: "Lena"},
+            {
+                id: 1,
+                name: "Nastya",
+                avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0AfKY4bAlZOoZf1-lx6csbUt1LrtdMeuzLaiYapJPAVaLPdfBQSr1dOy5SRO8vev0BdE&usqp=CAU"
+            },
+            {
+                id: 2,
+                name: "Alex",
+                avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTH8C8VibswhLf3oI9Y-oEncHluuxKte7xvRw&usqp=CAU"
+            },
+            {
+                id: 3,
+                name: "Masha",
+                avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSppWophE6gr9mU8RtSdE8Q9sA75aUGBGFFNw&usqp=CAU"
+            },
+            {
+                id: 4,
+                name: "Dima",
+                avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThjiIep4R49K8xkJr_xQxVOXUvblr-wBlbGA&usqp=CAU"
+            },
+            {
+                id: 5,
+                name: "Lena",
+                avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_ex0z9Qxd-dAv5wzHfQHQ_h5MeN5nlBgnbw&usqp=CAU"
+            },
         ],
         messagesText: [
             {id: 1, messageText: "Hi!!!"},

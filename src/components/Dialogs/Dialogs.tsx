@@ -10,7 +10,7 @@ type DialogsType = {
 
 const Dialogs: React.FC<DialogsType> = (props) => {
 
-    const dialogsElements = props.dialogPageState.dialogs.map(d => <DialogItem id={d.id} name={d.name}/>)
+    const dialogsElements = props.dialogPageState.dialogs.map(d => <DialogItem id={d.id} name={d.name} avatar={d.avatar}/>)
 
     let messagesElements = props.dialogPageState.messagesText.map((m) => <MessageItem messageText={m.messageText}/>)
 

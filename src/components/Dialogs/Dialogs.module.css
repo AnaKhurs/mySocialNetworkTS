@@ -5,21 +5,36 @@
 
 
 .dialogs {
-padding: 10px;
+    padding: 10px;
     background-color: olivedrab;
     /*text-decoration: none;*/
 }
 
 .dialog {
     padding: 5px;
+    display: flex;
+    align-items: center;
 }
-.dialogs .active{
+
+.nameDialogItem {
+    padding-left: 5px;
+
+}
+
+.dialogs .active {
     color: gold;
 }
+
 .messages {
     padding: 20px;
 }
 
 .message {
     padding: 1px;
+}
+
+.avatarDialogItem {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
 }
