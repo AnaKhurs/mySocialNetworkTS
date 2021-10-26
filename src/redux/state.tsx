@@ -7,6 +7,7 @@ export type DialogType = {
 export type MessageTextType = {
     id: number
     messageText: string
+    from: string
 }
 export type PostType = {
     id: number
@@ -66,9 +67,9 @@ const state = {
             },
         ],
         messagesText: [
-            {id: 1, messageText: "Hi!!!"},
-            {id: 2, messageText: "How are you?"},
-            {id: 3, messageText: "yoooooo"},
+            {id: 1, messageText: "Hi!!!", from: "sender"},
+            {id: 2, messageText: "How are you?", from: "sender"},
+            {id: 3, messageText: "yoooooo", from: "receiver"},
         ],
     },
 }

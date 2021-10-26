@@ -12,7 +12,7 @@ const Dialogs: React.FC<DialogsType> = (props) => {
 
     const dialogsElements = props.dialogPageState.dialogs.map(d => <DialogItem id={d.id} name={d.name} avatar={d.avatar}/>)
 
-    let messagesElements = props.dialogPageState.messagesText.map((m) => <MessageItem messageText={m.messageText}/>)
+    let messagesElements = props.dialogPageState.messagesText.map((m) => <MessageItem messageText={m.messageText} from={m.from}/>)
 
     return (
         <div className={classes.content}>
@@ -20,7 +20,10 @@ const Dialogs: React.FC<DialogsType> = (props) => {
                 {dialogsElements}
             </div>
             <div className={classes.messages}>
-                {messagesElements}
+                <div>
+                    {messagesElements}
+                </div>
+
             </div>
         </div>
     )
