@@ -15,3 +15,12 @@
     height: 50px;
     border-radius: 50%;
 }
+
+.dialog a {
+    color: black;
+    text-decoration: none;
+}
+
+.dialog a.activeLink {
+    color: gold;
+}

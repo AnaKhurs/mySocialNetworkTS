@@ -15,7 +15,8 @@ const DialogItem: React.FC<DialogItemType> = (props) => {
         <div className={classes.dialog}>
 
                 <img className={classes.avatarDialogItem} src={props.avatar}/>
-                <NavLink className={classes.nameDialogItem} to={path}>{props.name}</NavLink>
+             {/*   <NavLink className={classes.nameDialogItem} to={path}>{props.name}</NavLink>*/}
+            <NavLink className={classes.nameDialogItem} activeClassName={classes.activeLink} to={path}>{props.name}</NavLink>
 
         </div>
     )

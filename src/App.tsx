@@ -20,7 +20,7 @@ function App(props: AppType) {
         <BrowserRouter>
             <div className='app-wrapper'>
                 <Header/>
-                <Navbar/>
+                <Navbar sidebarState={props.state.sidebar}/>
                 <div className='app-wrapper-content'>
                     <Route path='/dialogs' render={() => <Dialogs dialogPageState={props.state.dialogPage}/>}/>
                     <Route path='/profile' render={() => <Profile profilePageState={props.state.profilePage}/>}/>

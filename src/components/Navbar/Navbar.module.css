@@ -13,3 +13,30 @@
 .item a.activeLink {
     color: gold;
 }
+
+.friends{
+    color: white;
+}
+
+.arrayFriends{
+    display: flex;
+}
+
+.itemFriend{
+    padding-right: 5px;
+}
+
+.avatarFriend{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.friends a {
+    color: white;
+    text-decoration: none;
+}
+
+.friends a.activeLink {
+    color: gold;
+}
