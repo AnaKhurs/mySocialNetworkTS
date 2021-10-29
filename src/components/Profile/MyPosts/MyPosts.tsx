@@ -5,6 +5,7 @@ import {PostType} from "./../../../redux/state";
 
 type ProfileInfoType = {
     posts: Array<PostType>
+    addNewPost: (messagePost:string) => void
 }
 
 const MyPosts: React.FC<ProfileInfoType> = (props) => {
@@ -16,7 +17,9 @@ const MyPosts: React.FC<ProfileInfoType> = (props) => {
     let addPost = () => {
         if (newPostElement.current) {
             let text = newPostElement.current.value;
-            alert(text)
+            props.addNewPost(text)
+            newPostElement.current.value = "";
+
         }
     }
 

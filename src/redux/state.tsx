@@ -1,3 +1,5 @@
+import {rerenderEntireTree} from "../render";
+
 export type DialogType = {
     id: number
     name: string
@@ -90,6 +92,15 @@ const state:StateType = {
             { id: 3, name: "Nastya", avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThjiIep4R49K8xkJr_xQxVOXUvblr-wBlbGA&usqp=CAU"},
         ]
     }
+}
+
+
+export const addNewPost = (messagePost:string) => {
+    let newPost = {
+            id: 5, message: messagePost, like: 18
+    }
+    state.profilePage.posts.push(newPost);
+    rerenderEntireTree(state);
 }
 
 
