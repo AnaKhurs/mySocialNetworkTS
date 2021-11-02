@@ -11,7 +11,7 @@ const Post: React.FC<PostType> = (props) => {
         <div className={classes.item}>
             <div className={classes.avaPost}>
                 <div className={classes.ava}>
-                    <img src='https://cdn.pixabay.com/photo/2015/03/03/08/55/portrait-657116__340.jpg'/>
+                    <img src='https://meragor.com/files/styles//220_220_bottom_wm/cherno-belye-avy-044.jpg'/>
                 </div>
                 <div className={classes.messagePost}>
                     {props.message}
