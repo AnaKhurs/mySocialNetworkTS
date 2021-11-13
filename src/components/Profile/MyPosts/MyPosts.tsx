@@ -1,12 +1,11 @@
 import React, {ChangeEvent, Ref} from 'react';
 import classes from './MyPosts.module.css'
 import Post from "./Post/Post";
-import {PostType, ProfilePageType} from "./../../../redux/state";
+import {AddPostActionType, ChangeNewPostTextActionType, PostType, ProfilePageType} from "./../../../redux/state";
 
 type ProfileInfoType = {
     profilePageState: ProfilePageType
-    addNewPost: (messagePost:string) => void
-    changeNewPostText: (newPostText: string) => void
+    dispatch: (action: AddPostActionType | ChangeNewPostTextActionType) => void
 }
 
 const MyPosts: React.FC<ProfileInfoType> = (props) => {
@@ -17,15 +16,17 @@ const MyPosts: React.FC<ProfileInfoType> = (props) => {
 
     let addPost = () => {
         if (newPostElement.current) {
-           /* let text = newPostElement.current.value;*/
-            props.addNewPost(props.profilePageState.newPostText)
+            /* let text = newPostElement.current.value;*/
+            /*            props.addNewPost(props.profilePageState.newPostText)*/
+            props.dispatch({type: 'ADD-POST', messagePost: (props.profilePageState.newPostText)})
         }
     }
 
     const onPostChange = () => {
-        if (newPostElement.current){
+        if (newPostElement.current) {
             let text = newPostElement.current.value;
-            props.changeNewPostText(text);
+            /* props.changeNewPostText(text);*/
+            props.dispatch({type: "CHANGE-NEW-POST-TEXT", newPostText: text})
         }
 
 
@@ -36,7 +37,8 @@ const MyPosts: React.FC<ProfileInfoType> = (props) => {
             <h3>My Posts</h3>
             <div>
                 <div>
-                    <textarea onChange={onPostChange} value={props.profilePageState.newPostText} ref={newPostElement}></textarea>
+                    <textarea onChange={onPostChange} value={props.profilePageState.newPostText}
+                              ref={newPostElement}></textarea>
                 </div>
                 <div>
                     <button onClick={addPost}>Add post</button>
