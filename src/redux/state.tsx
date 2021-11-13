@@ -24,6 +24,7 @@ export type ProfilePageType = {
 export type DialogPageType = {
     dialogs: Array<DialogType>
     messagesText: Array<MessageTextType>
+    newMessageText: string
 }
 
 export type StateType = {
@@ -51,13 +52,18 @@ export type StoreType = {
 
 }
 
-export type ActionCreateType = ReturnType<typeof addPostActionCreator> | ReturnType<typeof changeNewPostTextActionCreator>
+
+export type ActionCreateType =
+    ReturnType<typeof addPostActionCreator>
+    | ReturnType<typeof changeNewPostTextActionCreator>
+    | ReturnType<typeof changeNewMessageTextActionCreator>
+    | ReturnType<typeof sendMessageActionCreator>
 
 
 export const addPostActionCreator = (text: string) => {
     return {
         type: 'ADD-POST',
-        messagePost: (text)
+        messagePost: text
     } as const
 }
 
@@ -68,8 +74,23 @@ export const changeNewPostTextActionCreator = (text: string) => {
     } as const
 }
 
+export const changeNewMessageTextActionCreator = (text: string) => {
+    return {
+        type: "CHANGE-NEW-MESSAGE-TEXT",
+        newMessageText: text
+    } as const
+}
+export const sendMessageActionCreator = (text: string) => {
+    return {
+        type: "SEND-MESSAGE",
+        textMessage: text
+    } as const
+}
+
 const ADD_POST = "ADD-POST"
 const CHANGE_NEW_POST_TEXT = "CHANGE-NEW-POST-TEXT"
+const SEND_MESSAGE = "SEND-MESSAGE"
+const CHANGE_NEW_MESSAGE_TEXT = "CHANGE-NEW-MESSAGE-TEXT"
 
 export const store: StoreType = {
     _state: {
@@ -113,7 +134,9 @@ export const store: StoreType = {
                 {id: 1, messageText: "Hi!!!", from: "sender"},
                 {id: 2, messageText: "How are you?", from: "sender"},
                 {id: 3, messageText: "yoooooo", from: "receiver"},
+                {id: 4, messageText: "yo!", from: "receiver"},
             ],
+            newMessageText: "",
         },
         sidebar: {
             friends: [
@@ -146,15 +169,21 @@ export const store: StoreType = {
     },
     dispatch(action) {
         if (action.type === ADD_POST) {
-            let newPost = {
-                id: 5, message: action.messagePost, like: 18
-            }
+            let newPost = {id: 5, message: action.messagePost, like: 18}
             this._state.profilePage.posts.push(newPost);
             this._callSubscriber(this._state);
             this._state.profilePage.newPostText = "";
         } else if (action.type === CHANGE_NEW_POST_TEXT) {
             this._state.profilePage.newPostText = action.newPostText;
             this._callSubscriber(this._state);
+        } else if (action.type === CHANGE_NEW_MESSAGE_TEXT) {
+            this._state.dialogPage.newMessageText = action.newMessageText;
+            this._callSubscriber(this._state);
+        } else if (action.type === SEND_MESSAGE) {
+            const newMessage = {id: 4, messageText: action.textMessage, from: "receiver"}
+            this._state.dialogPage.messagesText.push(newMessage);
+            this._callSubscriber(this._state);
+            this._state.dialogPage.newMessageText = "";
         }
     },
 }
