@@ -1,11 +1,16 @@
 import React, {ChangeEvent, Ref} from 'react';
 import classes from './MyPosts.module.css'
 import Post from "./Post/Post";
-import {AddPostActionType, ChangeNewPostTextActionType, PostType, ProfilePageType} from "./../../../redux/state";
+import {
+    ActionCreateType,
+    addPostActionCreator,
+    changeNewPostTextActionCreator,
+    ProfilePageType
+} from "./../../../redux/state";
 
 type ProfileInfoType = {
     profilePageState: ProfilePageType
-    dispatch: (action: AddPostActionType | ChangeNewPostTextActionType) => void
+    dispatch: (action: ActionCreateType) => void
 }
 
 const MyPosts: React.FC<ProfileInfoType> = (props) => {
@@ -16,20 +21,15 @@ const MyPosts: React.FC<ProfileInfoType> = (props) => {
 
     let addPost = () => {
         if (newPostElement.current) {
-            /* let text = newPostElement.current.value;*/
-            /*            props.addNewPost(props.profilePageState.newPostText)*/
-            props.dispatch({type: 'ADD-POST', messagePost: (props.profilePageState.newPostText)})
+            props.dispatch(addPostActionCreator(props.profilePageState.newPostText))
         }
     }
 
     const onPostChange = () => {
         if (newPostElement.current) {
             let text = newPostElement.current.value;
-            /* props.changeNewPostText(text);*/
-            props.dispatch({type: "CHANGE-NEW-POST-TEXT", newPostText: text})
+            props.dispatch(changeNewPostTextActionCreator(text))
         }
-
-
     }
 
     return (

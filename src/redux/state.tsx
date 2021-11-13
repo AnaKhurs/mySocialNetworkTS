@@ -47,7 +47,7 @@ export type StoreType = {
     _callSubscriber: (state: StateType) => void
     getState: () => StateType
     subscribe: (observer: (state: StateType) => void) => void
-    dispatch: (action: AddPostActionType | ChangeNewPostTextActionType) => void
+    dispatch: (action: ActionCreateType) => void
 
 }
 
@@ -60,6 +60,23 @@ export type ChangeNewPostTextActionType = {
     type: "CHANGE-NEW-POST-TEXT"
     newPostText: string
 }
+
+export type ActionCreateType = AddPostActionType | ChangeNewPostTextActionType
+
+
+export const addPostActionCreator = (text: string): AddPostActionType => {
+    return {
+        type: 'ADD-POST',
+        messagePost: (text)
+    }
+}
+
+export const changeNewPostTextActionCreator = (text: string): ChangeNewPostTextActionType => {
+    return {type: "CHANGE-NEW-POST-TEXT", newPostText: text}
+}
+
+const ADD_POST = "ADD-POST"
+const CHANGE_NEW_POST_TEXT = "CHANGE-NEW-POST-TEXT"
 
 export const store: StoreType = {
     _state: {
@@ -135,14 +152,14 @@ export const store: StoreType = {
         this._callSubscriber = observer;
     },
     dispatch(action) {
-        if (action.type === "ADD-POST") {
+        if (action.type === ADD_POST) {
             let newPost = {
                 id: 5, message: action.messagePost, like: 18
             }
             this._state.profilePage.posts.push(newPost);
             this._callSubscriber(this._state);
             this._state.profilePage.newPostText = "";
-        } else if (action.type === "CHANGE-NEW-POST-TEXT") {
+        } else if (action.type === CHANGE_NEW_POST_TEXT) {
             this._state.profilePage.newPostText = action.newPostText;
             this._callSubscriber(this._state);
         }

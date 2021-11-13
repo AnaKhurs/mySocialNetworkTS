@@ -2,7 +2,6 @@ import React from 'react';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-/*import state, {addNewPost, changeNewPostText, StateType, subscribe} from "./redux/state";*/
 import {StateType, store} from "./redux/state"
 import ReactDOM from "react-dom";
 
