@@ -6,7 +6,7 @@ import {
     addPostActionCreator,
     changeNewPostTextActionCreator,
     ProfilePageType
-} from "./../../../redux/state";
+} from "../../../redux/store";
 
 type ProfileInfoType = {
     profilePageState: ProfilePageType
