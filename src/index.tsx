@@ -8,8 +8,7 @@ import ReactDOM from "react-dom";
 
 
 export const rerenderEntireTree = (state: StateType) => {
-    ReactDOM.render(<App state={store.getState()}
-                         dispatch={store.dispatch.bind(store)}/>, document.getElementById('root')
+    ReactDOM.render(<App store={store}/>, document.getElementById('root')
     );
 }
 rerenderEntireTree(store.getState());
