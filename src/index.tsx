@@ -8,21 +8,24 @@ import ReactDOM from "react-dom";
 import {BrowserRouter} from "react-router-dom";
 import {Provider} from "react-redux";
 
-export const rerenderEntireTree = (state: StateType) => {
-    ReactDOM.render(
-        <BrowserRouter>
-            <Provider store={store}>
-                <App/>
-            </Provider>
-        </BrowserRouter>,
-        document.getElementById('root')
-    );
-}
+/*export const rerenderEntireTree = (state: StateType) => {*/
+ReactDOM.render(
+    <BrowserRouter>
+        <Provider store={store}>
+            <App/>
+        </Provider>
+    </BrowserRouter>,
+    document.getElementById('root')
+);
+/*}
+
+
 rerenderEntireTree(store.getState());
 store.subscribe(() => {
     const state = store.getState();
     rerenderEntireTree(state);
 });
+*/
 
 
 // If you want to start measuring performance in your app, pass a function

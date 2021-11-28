@@ -14,12 +14,13 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
     switch (action.type) {
         case ADD_POST:
             let newPost = {id: 5, message: action.messagePost, like: 18}
-            state.posts.push(newPost);
-            state.newPostText = "";
-            break;
+            return  {
+                ...state,
+                posts: [...state.posts, newPost],
+                newPostText: ""
+            }
         case CHANGE_NEW_POST_TEXT:
-            state.newPostText = action.newPostText;
-            break;
+            return {...state, newPostText: action.newPostText}
     }
     return state
 }
