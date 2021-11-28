@@ -37,16 +37,18 @@ const initialState = {
     newMessageText: "",
 }
 
-export const dialogReducer = (state: DialogPageType = initialState, action: ActionCreateType):DialogPageType => {
+export const dialogReducer = (state: DialogPageType = initialState, action: ActionCreateType): DialogPageType => {
     switch (action.type) {
         case CHANGE_NEW_MESSAGE_TEXT:
-            state.newMessageText = action.newMessageText;
-            break;
+            return {...state, newMessageText: action.newMessageText}
         case SEND_MESSAGE:
             const newMessage = {id: 4, messageText: action.textMessage, from: "receiver"}
-            state.messagesText.push(newMessage);
-            state.newMessageText = "";
-            break;
+            return {
+                ...state,
+                messagesText: [...state.messagesText, newMessage],
+                newMessageText: ""
+            }
+
     }
 
     return state
