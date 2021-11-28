@@ -5,10 +5,18 @@ import reportWebVitals from './reportWebVitals';
 import {store} from "./redux/redux-store"
 import {StateType} from "./redux/store"
 import ReactDOM from "react-dom";
+import {BrowserRouter} from "react-router-dom";
+import { StoreContext } from './StoreContext';
 
 
 export const rerenderEntireTree = (state: StateType) => {
-    ReactDOM.render(<App store={store}/>, document.getElementById('root')
+    ReactDOM.render(
+        <BrowserRouter>
+            <StoreContext.Provider value={store}>
+                <App/>
+            </StoreContext.Provider>
+        </BrowserRouter>,
+        document.getElementById('root')
     );
 }
 rerenderEntireTree(store.getState());
