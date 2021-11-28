@@ -13,6 +13,7 @@ export type MessageTextType = {
     messageText: string
     from: string
 }
+
 export type PostType = {
     id: number
     message: string

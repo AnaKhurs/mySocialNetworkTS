@@ -1,26 +1,19 @@
 import React from 'react';
-import {StoreType} from "../../redux/store";
-import {StoreContext} from '../../StoreContext';
+import { FriendType } from "../../redux/store";
 import Navbar from "./Navbar";
+import {connect} from "react-redux";
+import {StateType} from "../../redux/redux-store";
 
-type PropsType = {
-    //store: StoreType
+type MapStateToPropsType = {
+    friends: FriendType[];
 }
 
-export const NavbarContainer = (props: PropsType) => {
+const mapStateToProps = (state: StateType): MapStateToPropsType => {
+    return {
+        friends: state.sidebar.friends
+    }
+};
 
-    return (
-        <StoreContext.Consumer>
-            {
-                store => {
-                    return (
-                        <Navbar friends={store.getState().sidebar.friends}/>
-                    )
-                }
-            }
+export type NavbarPropsType = MapStateToPropsType
 
-
-        </StoreContext.Consumer>
-    )
-
-}
+export const NavbarContainer = connect(mapStateToProps)(Navbar)

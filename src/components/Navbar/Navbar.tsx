@@ -1,13 +1,10 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import classes from './Navbar.module.css';
-import {FriendType} from "../../redux/store";
+import {NavbarPropsType} from "./NavbarContainer";
 
-type NavbarType = {
-    friends: FriendType[]
-}
 
-const Navbar:React.FC<NavbarType> = (props) => {
+const Navbar= (props:NavbarPropsType) => {
 
     const itemFriendElements = props.friends.map(f => <div key={f.id} className={classes.itemFriend}>
         <img className={classes.avatarFriend} src={f.avatar}/>

@@ -1,18 +1,11 @@
-import React, {ChangeEvent, Ref} from 'react';
+import React from 'react';
 import classes from './MyPosts.module.css'
 import Post from "./Post/Post";
-import {PostType} from "../../../redux/store";
+import {MyPostsPropsType} from "./MyPostsContainer";
 
-type ProfileInfoType = {
-    //profilePageState: ProfilePageType
 
-    posts: PostType[]
-    addPost: (text: string) => void
-    updateNewPostText: (text: string) => void
-    newPostText: string
-}
+export const MyPosts = (props: MyPostsPropsType) => {
 
-export const MyPosts: React.FC<ProfileInfoType> = (props) => {
 
     let postsElements = props.posts.map((p) => <Post message={p.message} like={p.like}/>)
 
@@ -54,4 +47,4 @@ export const MyPosts: React.FC<ProfileInfoType> = (props) => {
         </div>
 
     )
-}
+};
