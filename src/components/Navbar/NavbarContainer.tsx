@@ -1,8 +1,8 @@
 import React from 'react';
-import { FriendType } from "../../redux/store";
 import Navbar from "./Navbar";
 import {connect} from "react-redux";
 import {StateType} from "../../redux/redux-store";
+import {FriendType} from "../../redux/sidebar-reducer";
 
 type MapStateToPropsType = {
     friends: FriendType[];

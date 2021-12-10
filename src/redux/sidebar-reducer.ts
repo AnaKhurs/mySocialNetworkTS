@@ -1,4 +1,14 @@
-import {ActionCreateType, FriendsType} from "./store";
+import {addPostActionCreator} from "./profile-reducer";
+
+export type FriendsType = {
+    friends: Array<FriendType>
+}
+
+export type FriendType = {
+    id: number
+    name: string
+    avatar: string
+}
 
 const initialState = {
     friends: [
@@ -20,6 +30,6 @@ const initialState = {
     ]
 }
 
-export const sidebarReducer = (state: FriendsType = initialState, action: ActionCreateType) => {
+export const sidebarReducer = (state: FriendsType = initialState) => {
     return state
 }

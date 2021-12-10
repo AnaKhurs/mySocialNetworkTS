@@ -1,12 +1,13 @@
 import React from 'react';
-import {
-    ActionCreateType,
-    changeNewMessageTextActionCreator, DialogType, MessageTextType,
-    sendMessageActionCreator
-} from "../../redux/store";
 import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
 import {StateType} from "../../redux/redux-store";
+import {
+    ActionTypeDialogReducer,
+    changeNewMessageTextActionCreator,
+    DialogType,
+    MessageTextType, sendMessageActionCreator
+} from "../../redux/dialog-reducer";
 
 
 type MapStareToPropsType = {
@@ -31,7 +32,7 @@ const mapStareToProps = (state: StateType): MapStareToPropsType => {
     }
 }
 
-const mapDispatchToProps = (dispatch: (action: ActionCreateType) => void): MapDispatchToPropsType => {
+const mapDispatchToProps = (dispatch: (action: ActionTypeDialogReducer) => void): MapDispatchToPropsType => {
     return {
         changeNewMessageText: (textNewMessage: string) => {
             dispatch(changeNewMessageTextActionCreator(textNewMessage))
