@@ -4,21 +4,16 @@ import classes from './Users.module.css'
 import axios from "axios";
 import userPhoto from './../../assets/images/abstract-user-flat-4.svg'
 
-export class Users extends React.Component<UserPropsType>{
-    constructor(props:UserPropsType) {
+export class Users extends React.Component<UserPropsType> {
+    constructor(props: UserPropsType) {
         super(props);
-    }
-
-    getUsers = () => {
-        if (this.props.users.length === 0) {
-            axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
+        axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
                 this.props.setUsers(response.data.items)
-                }
-            )
-        }
+            }
+        )
     }
     render() {
-        return(
+        return (
             <div>
                 {this.props.users.map(u => <div key={u.id}>
                     <span>
@@ -44,7 +39,6 @@ export class Users extends React.Component<UserPropsType>{
                     </span>
                     </div>
                 )}
-                <button onClick={this.getUsers}>GET USERS</button>
             </div>
         )
     }
