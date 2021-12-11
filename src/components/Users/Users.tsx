@@ -5,7 +5,7 @@ import classes from './Users.module.css'
 
 export const Users = (props: UserPropsType) => {
     debugger
-    if (props.users.length === 4) {
+    if (props.users.length === 0) {
         props.setUsers([
             {
                 id: 1,
@@ -23,7 +23,26 @@ export const Users = (props: UserPropsType) => {
                 status: "I am a boss to!",
                 location: {city: "Minsk", country: "Belarus"}
 
-            }])
+            },
+            {
+                id: 3,
+                fullName: "Maksim",
+                avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThjiIep4R49K8xkJr_xQxVOXUvblr-wBlbGA&usqp=CAU",
+                followed: true,
+                status: "I am a boss to!!",
+                location: {city: "Minsk", country: "Belarus"}
+
+            },
+            {
+                id: 4,
+                fullName: "Vladimir",
+                avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTH8C8VibswhLf3oI9Y-oEncHluuxKte7xvRw&usqp=CAU",
+                followed: false,
+                status: "I am a boss to!!!",
+                location: {city: "Minsk", country: "Belarus"}
+
+            },
+        ])
     }
     return (
         <div>

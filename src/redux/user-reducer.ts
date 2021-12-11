@@ -16,43 +16,7 @@ type InitialStateType = {
 }
 
 const initialState: InitialStateType = {
-    users: [
-        {
-            id: 1,
-            fullName: "Elena",
-            avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0AfKY4bAlZOoZf1-lx6csbUt1LrtdMeuzLaiYapJPAVaLPdfBQSr1dOy5SRO8vev0BdE&usqp=CAU",
-            followed: true,
-            status: "I am a boss",
-            location: {city: "Minsk", country: "Belarus"}
-        },
-        {
-            id: 2,
-            fullName: "Alexander",
-            avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTH8C8VibswhLf3oI9Y-oEncHluuxKte7xvRw&usqp=CAU",
-            followed: true,
-            status: "I am a boss to!",
-            location: {city: "Minsk", country: "Belarus"}
-
-        },
-        {
-            id: 3,
-            fullName: "Maksim",
-            avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThjiIep4R49K8xkJr_xQxVOXUvblr-wBlbGA&usqp=CAU",
-            followed: true,
-            status: "I am a boss to!!",
-            location: {city: "Minsk", country: "Belarus"}
-
-        },
-        {
-            id: 4,
-            fullName: "Vladimir",
-            avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTH8C8VibswhLf3oI9Y-oEncHluuxKte7xvRw&usqp=CAU",
-            followed: false,
-            status: "I am a boss to!!!",
-            location: {city: "Minsk", country: "Belarus"}
-
-        },
-    ]
+    users: []
 }
 
 export const userReducer = (state: InitialStateType = initialState, action: ActionTypeUserReducer): InitialStateType => {
