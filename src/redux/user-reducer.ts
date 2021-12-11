@@ -2,13 +2,24 @@ type LocationType = {
     city: string
     country: string
 }
+export type PhotosType = {
+    "small": null | string
+    "large": null | string
+}
+
 export type User = {
-    id: number
+/*    id: number
     fullName: string
     avatar: string
     followed: boolean
     status: string
-    location: LocationType
+    location: LocationType*/
+    "name": string
+    "id": number
+    "uniqueUrlName": null | string
+    "photos": PhotosType
+    "status": null | string
+    "followed": boolean
 }
 
 type InitialStateType = {

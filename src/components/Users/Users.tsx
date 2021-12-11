@@ -1,55 +1,23 @@
 import React from 'react';
 import {UserPropsType} from "./UsersContainer";
 import classes from './Users.module.css'
-
+import axios from "axios";
+import userPhoto from './../../assets/images/abstract-user-flat-4.svg'
 
 export const Users = (props: UserPropsType) => {
-    debugger
     if (props.users.length === 0) {
-        props.setUsers([
-            {
-                id: 1,
-                fullName: "Elena",
-                avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0AfKY4bAlZOoZf1-lx6csbUt1LrtdMeuzLaiYapJPAVaLPdfBQSr1dOy5SRO8vev0BdE&usqp=CAU",
-                followed: true,
-                status: "I am a boss",
-                location: {city: "Minsk", country: "Belarus"}
-            },
-            {
-                id: 2,
-                fullName: "Alexander",
-                avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTH8C8VibswhLf3oI9Y-oEncHluuxKte7xvRw&usqp=CAU",
-                followed: true,
-                status: "I am a boss to!",
-                location: {city: "Minsk", country: "Belarus"}
-
-            },
-            {
-                id: 3,
-                fullName: "Maksim",
-                avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThjiIep4R49K8xkJr_xQxVOXUvblr-wBlbGA&usqp=CAU",
-                followed: true,
-                status: "I am a boss to!!",
-                location: {city: "Minsk", country: "Belarus"}
-
-            },
-            {
-                id: 4,
-                fullName: "Vladimir",
-                avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTH8C8VibswhLf3oI9Y-oEncHluuxKte7xvRw&usqp=CAU",
-                followed: false,
-                status: "I am a boss to!!!",
-                location: {city: "Minsk", country: "Belarus"}
-
-            },
-        ])
+        axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
+                debugger;
+                props.setUsers(response.data.items)
+            }
+        )
     }
     return (
         <div>
             {props.users.map(u => <div key={u.id}>
                     <span>
                        <div>
-                          <img className={classes.ava} src={u.avatar}/>
+                          <img className={classes.ava} src={u.photos.large ? u.photos.large : userPhoto}/>
                        </div>
                        <div>
                            {u.followed
@@ -60,12 +28,12 @@ export const Users = (props: UserPropsType) => {
                     </span>
                     <span>
                        <span>
-                           <div>{u.fullName}</div>
+                           <div>{u.name}</div>
                            <div>{u.status}</div>
                        </span>
                        <span>
-                            <div>{u.location.country}</div>
-                            <div>{u.location.city}</div>
+                            <div>{"u.location.country"}</div>
+                            <div>{"u.location.city"}</div>
                        </span>
                     </span>
                 </div>
