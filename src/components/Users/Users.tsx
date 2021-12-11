@@ -12,6 +12,7 @@ export class Users extends React.Component<UserPropsType> {
             }
         )
     }
+
     render() {
         return (
             <div>
