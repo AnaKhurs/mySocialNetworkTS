@@ -1,13 +1,10 @@
-type LocationType = {
-    city: string
-    country: string
-}
+
 export type PhotosType = {
     "small": null | string
     "large": null | string
 }
 
-export type User = {
+export type UserType = {
     "name": string
     "id": number
     "uniqueUrlName": null | string
@@ -17,7 +14,7 @@ export type User = {
 }
 
 type InitialStateType = {
-    users: Array<User>
+    users: Array<UserType>
     pageSize: number
     totalUsersCount: number
     currentPage: number
@@ -73,7 +70,7 @@ export const unfollowAC = (id: number) => {
     } as const
 }
 
-export const setUsersAC = (users: Array<User>) => {
+export const setUsersAC = (users: Array<UserType>) => {
     return {
         type: "SET-USERS",
         users: users
