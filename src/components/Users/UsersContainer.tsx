@@ -4,10 +4,10 @@ import {StateType} from "../../redux/redux-store";
 import {Users} from "./Users";
 import {
     ActionTypeUserReducer,
-    followAC,
-    setCurrentPageAC, setTotalUsersCountAC,
-    setUsersAC, toggleIsFetchingAC,
-    unfollowAC,
+    follow,
+    setCurrentPage, setTotalUsersCount,
+    setUsers, toggleIsFetching,
+    unfollow,
     UserType
 } from "../../redux/user-reducer";
 import axios from "axios";
@@ -84,34 +84,34 @@ const mapStareToProps = (state: StateType): MapStareToPropsType => {
 const mapDispatchToProps = (dispatch: (action: ActionTypeUserReducer) => void): MapDispatchToPropsType => {
     return {
         follow: (userId: number) => {
-            dispatch(followAC(userId))
+            dispatch(follow(userId))
         },
         unfollow: (userId: number) => {
-            dispatch(unfollowAC(userId))
+            dispatch(unfollow(userId))
         },
         setUsers: (users: Array<UserType>) => {
-            dispatch(setUsersAC(users))
+            dispatch(setUsers(users))
         },
         setCurrentPage: (currentPage: number) => {
-            dispatch(setCurrentPageAC(currentPage))
+            dispatch(setCurrentPage(currentPage))
         },
         setTotalUsersCount: (totalUsers: number) => {
-            dispatch(setTotalUsersCountAC(totalUsers))
+            dispatch(setTotalUsersCount(totalUsers))
         },
         toggleIsFetching: (isFetching: boolean) => {
-            dispatch(toggleIsFetchingAC(isFetching))
+            dispatch(toggleIsFetching(isFetching))
         }
     }
 }
 
 export const UsersContainer = connect(mapStareToProps,
     {
-        follow: followAC,
-        unfollow: unfollowAC,
-        setUsers: setUsersAC,
-        setCurrentPage: setCurrentPageAC,
-        setTotalUsersCount: setTotalUsersCountAC,
-        toggleIsFetching: toggleIsFetchingAC
+        follow,
+        unfollow,
+        setUsers,
+        setCurrentPage,
+        setTotalUsersCount,
+        toggleIsFetching,
     })(UsersAPIContainer)
 
 
