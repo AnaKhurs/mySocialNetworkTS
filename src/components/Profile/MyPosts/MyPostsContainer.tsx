@@ -4,8 +4,8 @@ import {connect} from "react-redux";
 import {StateType} from "../../../redux/redux-store";
 import {
     ActionTypeProfileReducer,
-    addPostActionCreator,
-    changeNewPostTextActionCreator,
+    addPost,
+    changeNewPostText,
     PostType
 } from "../../../redux/profile-reducer";
 
@@ -32,10 +32,10 @@ const mapStareToProps = (state: StateType): MapStareToPropsType => {
 const mapDispatchToProps = (dispatch: (action: ActionTypeProfileReducer) => void): MapDispatchToPropsType => {
     return {
         addPost: (text: string) => {
-            dispatch(addPostActionCreator(text))
+            dispatch(addPost(text))
         },
         updateNewPostText: (text: string) => {
-            dispatch(changeNewPostTextActionCreator(text))
+            dispatch(changeNewPostText(text))
         }
     }
 }

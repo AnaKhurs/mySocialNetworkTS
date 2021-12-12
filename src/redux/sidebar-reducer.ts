@@ -1,4 +1,4 @@
-import {addPostActionCreator} from "./profile-reducer";
+import {addPost} from "./profile-reducer";
 
 export type FriendsType = {
     friends: Array<FriendType>

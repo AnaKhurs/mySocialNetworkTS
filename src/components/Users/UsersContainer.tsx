@@ -3,7 +3,6 @@ import {connect} from "react-redux";
 import {StateType} from "../../redux/redux-store";
 import {Users} from "./Users";
 import {
-    ActionTypeUserReducer,
     follow,
     setCurrentPage, setTotalUsersCount,
     setUsers, toggleIsFetching,
@@ -78,29 +77,6 @@ const mapStareToProps = (state: StateType): MapStareToPropsType => {
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
         isFetching: state.usersPage.isFetching,
-    }
-}
-
-const mapDispatchToProps = (dispatch: (action: ActionTypeUserReducer) => void): MapDispatchToPropsType => {
-    return {
-        follow: (userId: number) => {
-            dispatch(follow(userId))
-        },
-        unfollow: (userId: number) => {
-            dispatch(unfollow(userId))
-        },
-        setUsers: (users: Array<UserType>) => {
-            dispatch(setUsers(users))
-        },
-        setCurrentPage: (currentPage: number) => {
-            dispatch(setCurrentPage(currentPage))
-        },
-        setTotalUsersCount: (totalUsers: number) => {
-            dispatch(setTotalUsersCount(totalUsers))
-        },
-        toggleIsFetching: (isFetching: boolean) => {
-            dispatch(toggleIsFetching(isFetching))
-        }
     }
 }
 
