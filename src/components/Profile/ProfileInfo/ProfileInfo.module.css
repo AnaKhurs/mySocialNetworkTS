@@ -5,4 +5,23 @@
 
 .description{
     padding: 10px;
+    display: flex;
+}
+
+.avaProfile{
+    width: 200px;
+    height: 200px;
+}
+.infoProfile{
+    padding-left: 10px;
+}
+.name{
+    font-weight: bold;
+}
+.aboutMe{
+    padding-top: 5px;
+}
+
+.contact{
+
 }
