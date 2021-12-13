@@ -4,9 +4,7 @@ import {Profile} from "./Profile";
 import {StateType} from "../../redux/redux-store";
 import {addPost, changeNewPostText, PostType, setUserProfile, UserProfileDataType} from "../../redux/profile-reducer";
 import axios from "axios";
-import {UserType} from "../../redux/user-reducer";
-import {withRouter} from "react-router-dom";
-
+import {RouteComponentProps, withRouter} from "react-router-dom";
 
 
 type MapStareToPropsType = {
@@ -19,14 +17,22 @@ type MapDispatchToPropsType = {
     changeNewPostText: (text: string) => void
     setUserProfile: (profile: UserProfileDataType) => void
 }
+type PathParamsType = {
+    userId: string
+}
+
+type PropsType = RouteComponentProps<PathParamsType> & UserPropsType
 
 export type UserPropsType = MapStareToPropsType & MapDispatchToPropsType
 
-class ProfileAPIContainer extends React.Component<UserPropsType> {
+class ProfileAPIContainer extends React.Component<PropsType> {
 
     componentDidMount() {
-
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/2`).then(response => {
+        let userId = this.props.match.params.userId
+/*        if (!userId){
+            userId = "2"
+        }*/
+        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId).then(response => {
                 this.props.setUserProfile(response.data)
             }
         )
@@ -34,7 +40,7 @@ class ProfileAPIContainer extends React.Component<UserPropsType> {
 
     render() {
         return <Profile {...this.props}
-            profile={this.props.profile}
+                        profile={this.props.profile}
         />
     }
 }
@@ -47,11 +53,11 @@ const mapStareToProps = (state: StateType): MapStareToPropsType => {
     }
 }
 
-/*const ff = withRouter(ProfileAPIContainer)*/
+const WithURLDataProfileContainer = withRouter(ProfileAPIContainer)
 
 export const ProfileContainer = connect(mapStareToProps,
     {
         addPost,
         changeNewPostText,
         setUserProfile,
-    })(ProfileAPIContainer)
+    })(WithURLDataProfileContainer)

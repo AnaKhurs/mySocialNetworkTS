@@ -28,7 +28,7 @@ export type UserProfileDataType = {
     "contacts": ContactsType
     "lookingForAJob": boolean
     "lookingForAJobDescription": null | string
-    "fullName": string
+    "fullName": null | string
     "userId": number
     "photos": PhotosType
 }
@@ -41,24 +41,24 @@ const initialState = {
         {id: 3, message: "Yoooo", like: 10},
     ],
     profile: {
-        "aboutMe": "Я крутой чел",
+        "aboutMe": null,
         "contacts": {
             "facebook": null,
             "website": null,
-            "vk": "vk.com/dimych",
-            "twitter": "https://twitter.com/@sdf",
-            "instagram": "instagra.com/sds",
+            "vk": null,
+            "twitter": null,
+            "instagram": null,
             "youtube": null,
             "github": null,
             "mainLink": null
         },
         "lookingForAJob": false,
-        "lookingForAJobDescription": "Найди меня",
-        "fullName": "Andrecky",
-        "userId": 15,
+        "lookingForAJobDescription": null,
+        "fullName": "NAME",
+        "userId": 0,
         "photos": {
-            "small": "https://social-network.samuraijs.com/activecontent/images/users/15/user-small.jpg?v=0",
-            "large": "https://social-network.samuraijs.com/activecontent/images/users/15/user.jpg?v=0"
+            "small": null,
+            "large": null
         }
     }
 }
