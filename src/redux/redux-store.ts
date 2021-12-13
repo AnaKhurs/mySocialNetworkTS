@@ -3,12 +3,14 @@ import {profileReducer} from "./profile-reducer";
 import {dialogReducer} from "./dialog-reducer";
 import {sidebarReducer} from "./sidebar-reducer";
 import {userReducer} from "./user-reducer";
+import {AuthReducer} from "./auth-reducer";
 
 const rootReducer = combineReducers({
     profilePage: profileReducer,
     dialogPage: dialogReducer,
     sidebar: sidebarReducer,
-    usersPage: userReducer
+    usersPage: userReducer,
+    auth: AuthReducer,
 });
 
 export const store = createStore(rootReducer);
