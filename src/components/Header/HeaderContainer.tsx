@@ -18,7 +18,6 @@ export type PropsType = MapStareToPropsType & MapDispatchToPropsType
 
 export class HeaderAPIContainer extends React.Component<PropsType> {
     componentDidMount() {
-        debugger
         axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`,
             {withCredentials: true})
             .then(response => {
