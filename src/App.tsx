@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-
 import {Route} from "react-router-dom";
 import Music from "./components/Music/Music";
 import News from "./components/News/News";
