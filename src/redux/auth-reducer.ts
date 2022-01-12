@@ -10,7 +10,6 @@ type AuthDataType = {
     "resultCode": number | null
 }
 
-
 type InitialStateType = {
     "data": DataType | null
     "messages": [] | null
@@ -40,7 +39,6 @@ export const AuthReducer = (state: InitialStateType = initialState, action: Acti
 
 export type ActionTypeAuthReducer = SetAuthUserDataAT
 type SetAuthUserDataAT = ReturnType<typeof setAuthUserData>
-
 
 export const setAuthUserData = (id: number, login: string, email: string) => {
     return {
