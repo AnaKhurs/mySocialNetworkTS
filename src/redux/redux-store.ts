@@ -1,4 +1,4 @@
-import {combineReducers, createStore} from "redux"
+import {applyMiddleware, combineReducers, createStore} from "redux"
 import {profileReducer} from "./profile-reducer";
 import {dialogReducer} from "./dialog-reducer";
 import {sidebarReducer} from "./sidebar-reducer";
@@ -13,7 +13,7 @@ const rootReducer = combineReducers({
     auth: AuthReducer,
 });
 
-export const store = createStore(rootReducer);
+export const store = createStore(rootReducer, applyMiddleware());
 
 export type StoreType = typeof store
 
