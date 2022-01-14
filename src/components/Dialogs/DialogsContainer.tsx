@@ -9,7 +9,6 @@ import {
     MessageTextType, sendMessageActionCreator
 } from "../../redux/dialog-reducer";
 
-
 type MapStareToPropsType = {
     dialogs: DialogType[]
     messagesText: MessageTextType[];
