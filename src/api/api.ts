@@ -14,15 +14,16 @@ export const userAPI = {
             .then(response => response.data)
     },
     unfollowUser(id: number) {
-        debugger
         return instance.delete(`follow/${id}`)
             .then(response => response.data)
     },
     followUser(id: number) {
-        debugger
         return instance.post(`follow/${id}`)
             .then(response => response.data)
     },
+    getProfile(userId: string) {
+        return axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
+    }
 }
 
 export const userAuthAPI = {
@@ -31,3 +32,4 @@ export const userAuthAPI = {
             .then(response => response.data)
     }
 }
+
