@@ -4,7 +4,6 @@ import classes from './Header.module.css';
 import {PropsType} from "./HeaderContainer";
 
 export const Header = (props: PropsType) => {
-    debugger
     return (
         <header className={classes.header}>
             <div className={classes.loginBlock}>

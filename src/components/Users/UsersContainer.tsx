@@ -10,7 +10,6 @@ import {
     UserType
 } from "../../redux/user-reducer";
 import {Preloader} from "../common/Preloader/Preloader";
-import {userAPI} from "../../api/api";
 
 
 type MapStareToPropsType = {
@@ -24,10 +23,7 @@ type MapStareToPropsType = {
 type MapDispatchToPropsType = {
     follow: (userId: number) => void
     unfollow: (userId: number) => void
-    setUsers: (users: Array<UserType>) => void
     setCurrentPage: (currentPage: number) => void
-    setTotalUsersCount: (totalUsers: number) => void
-    toggleIsFetching: (isFetching: boolean) => void
     toggleFollowingProgress: (isFetching: boolean, idUser: number) => void
     getUsers: (currentPage: number, pageSize: number) => void
 }
@@ -40,28 +36,11 @@ class UsersAPIContainer extends React.Component<UserPropsType> {
     componentDidMount() {
 
         this.props.getUsers(this.props.currentPage, this.props.pageSize)
-
-/*        this.props.toggleIsFetching(true)
-        userAPI.getUsers(this.props.currentPage, this.props.pageSize)
-            .then(data => {
-                this.props.toggleIsFetching(false)
-                this.props.setUsers(data.items)
-                this.props.setTotalUsersCount(data.totalCount)
-            }
-        )*/
     }
 
     onPageChanged = (pageNumber: number) => {
         this.props.getUsers(pageNumber, this.props.pageSize)
-
-/*        this.props.setCurrentPage(pageNumber);
-        this.props.toggleIsFetching(true)
-        userAPI.getUsers(pageNumber, this.props.pageSize)
-            .then(data => {
-                    this.props.toggleIsFetching(false)
-                    this.props.setUsers(data.items)
-                }
-            )*/
+        this.props.setCurrentPage(pageNumber)
     }
 
     render() {
@@ -74,7 +53,6 @@ class UsersAPIContainer extends React.Component<UserPropsType> {
                    users={this.props.users}
                    unfollow={this.props.unfollow}
                    follow={this.props.follow}
-                   toggleFollowingProgress={this.props.toggleFollowingProgress}
                    followingInProgress={this.props.followingInProgress}
             />
         </>
@@ -95,12 +73,9 @@ const mapStareToProps = (state: StateType): MapStareToPropsType => {
 
 export const UsersContainer = connect(mapStareToProps,
     {
-        follow,
-        unfollow,
-        setUsers,
+        follow: follow,
+        unfollow: unfollow,
         setCurrentPage,
-        setTotalUsersCount,
-        toggleIsFetching,
         toggleFollowingProgress,
         getUsers
     })(UsersAPIContainer)
