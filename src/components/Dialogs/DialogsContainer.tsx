@@ -11,8 +11,9 @@ import {
 
 type MapStareToPropsType = {
     dialogs: DialogType[]
-    messagesText: MessageTextType[];
+    messagesText: MessageTextType[]
     newMessageText: string
+    isAuth: boolean
 }
 
 type MapDispatchToPropsType = {
@@ -27,7 +28,8 @@ const mapStareToProps = (state: StateType): MapStareToPropsType => {
     return {
         dialogs: state.dialogPage.dialogs,
         messagesText: state.dialogPage.messagesText,
-        newMessageText: state.dialogPage.newMessageText
+        newMessageText: state.dialogPage.newMessageText,
+        isAuth: state.auth.isAuth
     }
 }
 
