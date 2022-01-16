@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {ComponentType} from 'react';
 import {connect} from "react-redux";
 import {StateType} from "../../redux/redux-store";
 import {Users} from "./Users";
@@ -11,6 +11,7 @@ import {
 } from "../../redux/user-reducer";
 import {Preloader} from "../common/Preloader/Preloader";
 import {withAuthRedirect} from "../HOC/withAuthRedirect";
+import {compose} from "redux";
 
 
 type MapStareToPropsType = {
@@ -32,7 +33,7 @@ type MapDispatchToPropsType = {
 export type UserPropsType = MapStareToPropsType & MapDispatchToPropsType
 
 
-class UsersAPIContainer extends React.Component<UserPropsType> {
+class UsersContainer extends React.Component<UserPropsType> {
 
     componentDidMount() {
 
@@ -60,7 +61,6 @@ class UsersAPIContainer extends React.Component<UserPropsType> {
     }
 }
 
-
 const mapStareToProps = (state: StateType): MapStareToPropsType => {
     return {
         users: state.usersPage.users,
@@ -72,13 +72,15 @@ const mapStareToProps = (state: StateType): MapStareToPropsType => {
     }
 }
 
-export default withAuthRedirect(connect(mapStareToProps,
-    {
-        follow: follow,
-        unfollow: unfollow,
-        setCurrentPage,
-        toggleFollowingProgress,
-        getUsers
-    })(UsersAPIContainer))
+export default compose<ComponentType>(
+    withAuthRedirect,
+    connect(mapStareToProps,
+        {
+            follow: follow,
+            unfollow: unfollow,
+            setCurrentPage,
+            toggleFollowingProgress,
+            getUsers
+        }))(UsersContainer)
 
 

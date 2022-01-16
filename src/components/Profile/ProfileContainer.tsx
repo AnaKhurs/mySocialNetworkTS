@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {ComponentType} from 'react';
 import {connect} from "react-redux";
 import {Profile} from "./Profile";
 import {StateType} from "../../redux/redux-store";
@@ -11,6 +11,7 @@ import {
 } from "../../redux/profile-reducer";
 import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
 import {withAuthRedirect} from "../HOC/withAuthRedirect";
+import {compose} from "redux";
 
 
 type MapStareToPropsType = {
@@ -31,7 +32,7 @@ type PropsType = RouteComponentProps<PathParamsType> & UserPropsType
 
 export type UserPropsType = MapStareToPropsType & MapDispatchToPropsType
 
-class ProfileAPIContainer extends React.Component<PropsType> {
+class ProfileContainer extends React.Component<PropsType> {
 
     componentDidMount() {
         let userId = this.props.match.params.userId
@@ -56,6 +57,11 @@ const mapStareToProps = (state: StateType): MapStareToPropsType => {
     }
 }
 
-const WithURLDataProfileContainer = withRouter(ProfileAPIContainer)
-
-export default withAuthRedirect(connect(mapStareToProps, {addPost, changeNewPostText, getUserProfile})(WithURLDataProfileContainer))
+export default compose<ComponentType>(
+    withAuthRedirect,
+    connect(mapStareToProps, {
+        addPost,
+        changeNewPostText,
+        getUserProfile
+    }),
+    withRouter)(ProfileContainer)

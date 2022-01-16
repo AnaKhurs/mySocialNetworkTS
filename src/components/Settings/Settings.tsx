@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {ComponentType} from 'react';
 import classes from './Settings.module.css';
 import {withAuthRedirect} from "../HOC/withAuthRedirect";
+import {compose} from "redux";
 
 const Settings = () => {
     return (
@@ -8,4 +9,4 @@ const Settings = () => {
     )
 }
 
-export default withAuthRedirect(Settings);
+export default compose<ComponentType>(withAuthRedirect)(Settings);
