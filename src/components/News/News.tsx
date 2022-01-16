@@ -1,5 +1,6 @@
 import React from 'react';
 import classes from './News.module.css';
+import {withAuthRedirect} from "../HOC/withAuthRedirect";
 
 const News = () => {
     return (
@@ -7,4 +8,4 @@ const News = () => {
     )
 }
 
-export default News;
+export default withAuthRedirect(News);

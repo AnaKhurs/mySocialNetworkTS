@@ -10,13 +10,13 @@ import {
     UserProfileDataType
 } from "../../redux/profile-reducer";
 import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
+import {withAuthRedirect} from "../HOC/withAuthRedirect";
 
 
 type MapStareToPropsType = {
     newPostText: string
     posts: Array<PostType>
     profile: UserProfileDataType
-    isAuth: boolean
 }
 type MapDispatchToPropsType = {
     addPost: (text: string) => void
@@ -42,7 +42,6 @@ class ProfileAPIContainer extends React.Component<PropsType> {
     }
 
     render() {
-        if (!this.props.isAuth) return <Redirect to={"/login"}/>
         return <Profile {...this.props}
                         profile={this.props.profile}
         />
@@ -53,16 +52,10 @@ const mapStareToProps = (state: StateType): MapStareToPropsType => {
     return {
         newPostText: state.profilePage.newPostText,
         posts: state.profilePage.posts,
-        profile: state.profilePage.profile,
-        isAuth: state.auth.isAuth
+        profile: state.profilePage.profile
     }
 }
 
 const WithURLDataProfileContainer = withRouter(ProfileAPIContainer)
 
-export const ProfileContainer = connect(mapStareToProps,
-    {
-        addPost,
-        changeNewPostText,
-        getUserProfile,
-    })(WithURLDataProfileContainer)
+export default withAuthRedirect(connect(mapStareToProps, {addPost, changeNewPostText, getUserProfile})(WithURLDataProfileContainer))

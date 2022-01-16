@@ -8,12 +8,12 @@ import {
     DialogType,
     MessageTextType, sendMessageActionCreator
 } from "../../redux/dialog-reducer";
+import {withAuthRedirect} from "../HOC/withAuthRedirect";
 
 type MapStareToPropsType = {
     dialogs: DialogType[]
     messagesText: MessageTextType[]
     newMessageText: string
-    isAuth: boolean
 }
 
 type MapDispatchToPropsType = {
@@ -28,8 +28,7 @@ const mapStareToProps = (state: StateType): MapStareToPropsType => {
     return {
         dialogs: state.dialogPage.dialogs,
         messagesText: state.dialogPage.messagesText,
-        newMessageText: state.dialogPage.newMessageText,
-        isAuth: state.auth.isAuth
+        newMessageText: state.dialogPage.newMessageText
     }
 }
 
@@ -44,4 +43,4 @@ const mapDispatchToProps = (dispatch: (action: ActionTypeDialogReducer) => void)
     }
 }
 
-export const DialogsContainer = connect(mapStareToProps, mapDispatchToProps)(Dialogs)
+export default withAuthRedirect(connect(mapStareToProps, mapDispatchToProps)(Dialogs))
