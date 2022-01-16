@@ -3,6 +3,7 @@ import classes from './ProfileInfo.module.css'
 import {UserProfileDataType} from "../../../redux/profile-reducer";
 import userPhoto from './../../../assets/images/abstract-user-flat-4.svg'
 import {Preloader} from "../../common/Preloader/Preloader";
+import {ProfileStatus} from "./ProfileStatus/ProfileStatus";
 
 type PropsType = {
     profile: UserProfileDataType
@@ -15,15 +16,19 @@ export const ProfileInfo = (props: PropsType) => {
     }
     return (
         <div>
-            <div className={classes.profileImg}>
+          {/*  <div className={classes.profileImg}>
                 <img src='https://www.tourdom.ru/upload/iblock/c67/c67d37818296f908f1ba70503667e48c.jpeg'/>
-            </div>
+            </div>*/}
             <div className={classes.description}>
                 <img className={classes.avaProfile}
                      src={props.profile.photos.large ? props.profile.photos.large : userPhoto}/>
                 <div className={classes.infoProfile}>
                     <div className={classes.name}>{props.profile.fullName}</div>
-                    <div className={classes.aboutMe}>{props.profile.aboutMe}</div>
+
+                   <ProfileStatus status={props.profile.aboutMe}/>
+                   {/* <div className={classes.aboutMe}>{props.profile.aboutMe}</div>
+                    <input/>*/}
+
                     <hr></hr>
                     <div className={classes.contact}>
                         <div>facebook: {props.profile.contacts.facebook}</div>
