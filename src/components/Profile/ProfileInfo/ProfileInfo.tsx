@@ -7,6 +7,8 @@ import {ProfileStatus} from "./ProfileStatus/ProfileStatus";
 
 type PropsType = {
     profile: UserProfileDataType
+    status: string
+    updateUserStatus: (status: string) => void
 }
 
 
@@ -16,7 +18,7 @@ export const ProfileInfo = (props: PropsType) => {
     }
     return (
         <div>
-          {/*  <div className={classes.profileImg}>
+            {/*  <div className={classes.profileImg}>
                 <img src='https://www.tourdom.ru/upload/iblock/c67/c67d37818296f908f1ba70503667e48c.jpeg'/>
             </div>*/}
             <div className={classes.description}>
@@ -25,10 +27,10 @@ export const ProfileInfo = (props: PropsType) => {
                 <div className={classes.infoProfile}>
                     <div className={classes.name}>{props.profile.fullName}</div>
 
-                   <ProfileStatus status={props.profile.aboutMe}/>
-                   {/* <div className={classes.aboutMe}>{props.profile.aboutMe}</div>
-                    <input/>*/}
+                    <ProfileStatus status={props.status} updateUserStatus={props.updateUserStatus}/>
 
+                    <hr></hr>
+                    <div className={classes.aboutMe}>aboutMe: {props.profile.aboutMe}</div>
                     <hr></hr>
                     <div className={classes.contact}>
                         <div>facebook: {props.profile.contacts.facebook}</div>
@@ -40,7 +42,7 @@ export const ProfileInfo = (props: PropsType) => {
                         <div>github: {props.profile.contacts.github}</div>
                         <div>mainLink: {props.profile.contacts.mainLink}</div>
                     </div>
-{/*                    <div className={classes.lookingForAJo}>lookingForAJob</div>
+                    {/*                    <div className={classes.lookingForAJo}>lookingForAJob</div>
                     <div className={classes.lookingForAJobDescription}>lookingForAJobDescription</div>
                     <div className={classes.fullName}>fullName</div>*/}
                 </div>

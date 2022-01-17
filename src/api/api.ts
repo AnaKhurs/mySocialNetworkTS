@@ -1,4 +1,5 @@
-import axios from "axios";
+import axios, {AxiosResponse} from "axios";
+import {UserProfileDataType} from "../redux/profile-reducer";
 
 const instance = axios.create(
     {
@@ -29,7 +30,15 @@ export const userAPI = {
 
 export const profileAPI = {
     getProfile(userId: string) {
-        return instance.get(`profile/` + userId)
+        return instance.get<UserProfileDataType>(`profile/` + userId)
+    },
+    getStatus(userId: string) {
+        return instance.get<string>(`/profile/status/` + userId)
+    },
+    updateStatus(status: string) {
+        return instance.put<string, AxiosResponse<ResponseType>>('/profile/status', {
+            status
+        })
     }
 }
 
@@ -40,3 +49,39 @@ export const userAuthAPI = {
     }
 }
 
+
+
+/*
+// api
+export const todolistsAPI = {
+    getTodolists() {
+        return instance.get<TodolistType[]>('todo-lists');
+    },
+    createTodolist(title: string) {
+        return instance.post<{ title: string }, AxiosResponse<ResponseType<{ item: TodolistType }>>>('todo-lists', {title});
+    },
+    deleteTodolist(id: string) {
+        return instance.delete<ResponseType>(`todo-lists/${id}`);
+    },
+    updateTodolist(id: string, title: string) {
+        return instance.put<{ title: string }, AxiosResponse<ResponseType>>(`todo-lists/${id}`, {title});
+    },
+    getTasks(todolistId: string) {
+        return instance.get<GetTasksResponse>(`todo-lists/${todolistId}/tasks`);
+    },
+    deleteTask(todolistId: string, taskId: string) {
+        return instance.delete<ResponseType>(`todo-lists/${todolistId}/tasks/${taskId}`);
+    },
+    createTask(todolistId: string, title: string) {
+        return instance.post<{ title: string }, AxiosResponse<ResponseType<{ item: TaskType }>>>(`todo-lists/${todolistId}/tasks`, {title});
+    },
+    updateTask(todolistId: string, taskId: string, model: UpdateTaskModelType) {
+        return instance.put<UpdateTaskModelType, AxiosResponse<ResponseType<{ item: TaskType }>>>(`todo-lists/${todolistId}/tasks/${taskId}`, model);
+    }
+}*/
+
+export type ResponseType<D = {}> = {
+    resultCode: number
+    messages: Array<string>
+    data: D
+}
