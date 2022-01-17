@@ -22,7 +22,14 @@ export const userAPI = {
             .then(response => response.data)
     },
     getProfile(userId: string) {
-        return axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
+        console.warn("Obsolete method. Please profileAPI object")
+        return profileAPI.getProfile(userId)
+    }
+}
+
+export const profileAPI = {
+    getProfile(userId: string) {
+        return instance.get(`profile/` + userId)
     }
 }
 
