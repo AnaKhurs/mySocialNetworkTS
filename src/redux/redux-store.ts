@@ -5,6 +5,7 @@ import {sidebarReducer} from "./sidebar-reducer";
 import {userReducer} from "./user-reducer";
 import {AuthReducer} from "./auth-reducer";
 import thunkMiddleware from "redux-thunk"
+import {reducer as formReducer} from "redux-form";
 
 const rootReducer = combineReducers({
     profilePage: profileReducer,
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
     sidebar: sidebarReducer,
     usersPage: userReducer,
     auth: AuthReducer,
+    form: formReducer,
 });
 
 export const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
@@ -19,3 +21,5 @@ export const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
 export type StoreType = typeof store
 
 export type StateType = ReturnType<typeof rootReducer>
+// @ts-ignore
+window.store = store;
