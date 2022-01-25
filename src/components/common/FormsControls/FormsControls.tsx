@@ -1,7 +1,6 @@
 import React from 'react';
 import classes from "./FormsControls.module.css";
 
-
 type PropsType = {
     input: any
     meta: any
