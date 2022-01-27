@@ -21,7 +21,6 @@ const AddMessageForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
             <button className={classes.button}>Send++++</button>
         </form>
     )
-
 }
 
 export const AddMessageReduxForm = reduxForm<FormDataType>({form: "dialogAddMessageForm"})(AddMessageForm)
