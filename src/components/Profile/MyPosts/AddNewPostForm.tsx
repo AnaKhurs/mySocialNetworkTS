@@ -1,12 +1,12 @@
 import React from 'react';
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import {maxLenghtCreator, required} from "../../../utils/validators/validators";
+import {maxLengthCreator, required} from "../../../utils/validators/validators";
 import {Textarea} from "../../common/FormsControls/FormsControls";
 
 export type FormDataType = {
     newPostTextBody: string
 }
-const maxLenght = maxLenghtCreator(10)
+const maxLenght = maxLengthCreator(10)
 
 
 const AddNewPostForm: React.FC<InjectedFormProps<FormDataType>> = (props: React.PropsWithChildren<InjectedFormProps<FormDataType, {}, string>>) => {
