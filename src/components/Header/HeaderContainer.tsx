@@ -1,12 +1,12 @@
 import React from 'react';
 import {Header} from "./Header";
 import {connect} from "react-redux";
-import {DataType, getAuthUserData} from "../../redux/auth-reducer";
+import {DataTypeAuthMe, getAuthUserData} from "../../redux/auth-reducer";
 import {StateType} from "../../redux/redux-store";
 
 
 type MapStareToPropsType = {
-    data: DataType | null
+    data: DataTypeAuthMe | null
     isAuth: boolean
 }
 type MapDispatchToPropsType = {

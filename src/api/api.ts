@@ -1,5 +1,6 @@
 import axios, {AxiosResponse} from "axios";
 import {UserProfileDataType} from "../redux/profile-reducer";
+import {AuthMeResponseType, DataTypeAuthMe} from "../redux/auth-reducer";
 
 const instance = axios.create(
     {
@@ -44,10 +45,34 @@ export const profileAPI = {
 
 export const userAuthAPI = {
     getAuthMe() {
-        return instance.get(`auth/me`)
-            .then(response => response.data)
-    }
+        return instance.get<ResponseType<DataTypeAuthMe>>(`auth/me`)
+         .then(response => response.data)
+    },
+    logIn(email: string, password: string, rememberMe: boolean) {
+        return instance.post<{ userId: number }, AxiosResponse<ResponseType<{ userId: number }>>>(`auth/login`, {
+            email,
+            password,
+            rememberMe
+        })
+    },
+    logOut() {
+        return instance.delete<ResponseType>(`auth/login`)
+    },
 }
+
+export type ResponseType<D = {}> = {
+    resultCode: number
+    messages: Array<string>
+    data: D
+}
+
+
+
+
+
+
+
+
 
 
 
@@ -79,9 +104,3 @@ export const todolistsAPI = {
         return instance.put<UpdateTaskModelType, AxiosResponse<ResponseType<{ item: TaskType }>>>(`todo-lists/${todolistId}/tasks/${taskId}`, model);
     }
 }*/
-
-export type ResponseType<D = {}> = {
-    resultCode: number
-    messages: Array<string>
-    data: D
-}
