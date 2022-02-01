@@ -19,7 +19,10 @@ type MapStareToPropsType = {
     posts: Array<PostType>
     profile: UserProfileDataType
     status: string
+    isAuth: boolean
+    authorized: number | null | undefined
 }
+
 type MapDispatchToPropsType = {
     addPost: (text: string) => void
     getUserProfile: (userId: string) => void
@@ -40,6 +43,7 @@ class ProfileContainer extends React.Component<PropsType> {
         let userId = this.props.match.params.userId
         if (!userId) {
             userId = "21108"
+            /*userId = this.props.authorized*/
         }
         this.props.getUserProfile(userId)
         this.props.getUserStatus(userId)
@@ -58,7 +62,10 @@ const mapStareToProps = (state: StateType): MapStareToPropsType => {
     return {
         posts: state.profilePage.posts,
         profile: state.profilePage.profile,
-        status: state.profilePage.status
+        status: state.profilePage.status,
+        isAuth: state.auth.isAuth,
+        authorized: state.auth.data?.id,
+
     }
 }
 
