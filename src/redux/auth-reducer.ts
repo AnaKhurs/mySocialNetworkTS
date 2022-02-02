@@ -2,7 +2,7 @@ import {Dispatch} from "redux";
 import {userAuthAPI} from "../api/api";
 import {ThunkAction} from "redux-thunk";
 import {StateType} from "./redux-store";
-import {stopSubmit} from "redux-form";
+import {FormAction, stopSubmit} from "redux-form";
 
 export type DataTypeAuthMe = {
     "id": number | null
@@ -70,7 +70,7 @@ export const getAuthUserData = () => {
     }
 }
 
-type ThunkType = ThunkAction<void, StateType, unknown, ActionTypeAuthReducer>
+type ThunkType = ThunkAction<void, StateType, unknown, ActionTypeAuthReducer | FormAction>
 
 export const login = (email: string, password: string, rememberMe: boolean): ThunkType => {
     return (dispatch) => {
@@ -78,10 +78,10 @@ export const login = (email: string, password: string, rememberMe: boolean): Thu
             .then(res => {
                     if (res.data.resultCode === 0) {
                         dispatch(getAuthUserData())
-                    } /*else {
+                    } else {
                         let message = res.data.messages.length > 0 ? res.data.messages[0] : "Error"
                         dispatch(stopSubmit("Login", {_error: message}))
-                    }*/
+                    }
                 }
             )
     }
