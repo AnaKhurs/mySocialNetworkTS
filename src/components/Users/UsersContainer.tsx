@@ -12,6 +12,14 @@ import {
 import {Preloader} from "../common/Preloader/Preloader";
 import {withAuthRedirect} from "../HOC/withAuthRedirect";
 import {compose} from "redux";
+import {
+    getSelectorUsers,
+    getSelectorCurrentPage,
+    getSelectorFollowingInProgress,
+    getSelectorIsFetching,
+    getSelectorPageSize,
+    getSelectorTotalUsersCount
+} from "../../redux/user-selectors";
 
 
 type MapStareToPropsType = {
@@ -61,7 +69,7 @@ class UsersContainer extends React.Component<UserPropsType> {
     }
 }
 
-const mapStareToProps = (state: StateType): MapStareToPropsType => {
+/*const mapStareToProps = (state: StateType): MapStareToPropsType => {
     return {
         users: state.usersPage.users,
         pageSize: state.usersPage.pageSize,
@@ -69,6 +77,17 @@ const mapStareToProps = (state: StateType): MapStareToPropsType => {
         currentPage: state.usersPage.currentPage,
         isFetching: state.usersPage.isFetching,
         followingInProgress: state.usersPage.followingInProgress,
+    }
+}*/
+
+const mapStareToProps = (state: StateType): MapStareToPropsType => {
+    return {
+        users: getSelectorUsers(state),
+        pageSize: getSelectorPageSize(state),
+        totalUsersCount: getSelectorTotalUsersCount(state),
+        currentPage: getSelectorCurrentPage(state),
+        isFetching: getSelectorIsFetching(state),
+        followingInProgress: getSelectorFollowingInProgress(state),
     }
 }
 
