@@ -10,16 +10,16 @@ type MapStareToPropsType = {
     isAuth: boolean
 }
 type MapDispatchToPropsType = {
-    getAuthUserData: () => void
+/*    getAuthUserData: () => void*/
     logout: () => void
 }
 
 export type PropsType = MapStareToPropsType & MapDispatchToPropsType
 
 export class HeaderAPIContainer extends React.Component<PropsType> {
-    componentDidMount() {
+/*    componentDidMount() {
         this.props.getAuthUserData()
-    }
+    }*/
 
     render() {
         return <Header {...this.props}/>;
@@ -33,4 +33,4 @@ const mapStateToProps = (state: StateType): MapStareToPropsType => {
     }
 }
 
-export const HeaderContainer = connect(mapStateToProps, {getAuthUserData, logout})(HeaderAPIContainer)
+export const HeaderContainer = connect(mapStateToProps, {logout})(HeaderAPIContainer)

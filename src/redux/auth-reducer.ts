@@ -57,17 +57,15 @@ export const setAuthUserData = (id: number | null, login: string | null, email: 
     } as const
 }
 
-export const getAuthUserData = () => {
-    return (dispatch: Dispatch) => {
-        userAuthAPI.getAuthMe()
-            .then(data => {
-                    if (data.resultCode === 0) {
-                        let {id, login, email} = data.data
-                        dispatch(setAuthUserData(id, login, email, true))
-                    }
+export const getAuthUserData = () => (dispatch: Dispatch) => {
+    return userAuthAPI.getAuthMe()
+        .then(data => {
+                if (data.resultCode === 0) {
+                    let {id, login, email} = data.data
+                    dispatch(setAuthUserData(id, login, email, true))
                 }
-            )
-    }
+            }
+        )
 }
 
 type ThunkType = ThunkAction<void, StateType, unknown, ActionTypeAuthReducer | FormAction>
