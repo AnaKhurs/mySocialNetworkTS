@@ -1,8 +1,5 @@
-import {Dispatch} from "redux";
-import {userAuthAPI} from "../api/api";
 import {ThunkAction} from "redux-thunk";
 import {StateType} from "./redux-store";
-import {FormAction, stopSubmit} from "redux-form";
 import {ActionTypeAuthReducer, getAuthUserData} from "./auth-reducer";
 
 
@@ -20,9 +17,8 @@ export const appReducer = (state: InitialStateType = initialState, action: Actio
         case "INITIALIZED-SUCCESS":
             return {
                 ...state,
-                initialized: false
+                initialized: true
             }
-
         default:
             return state
     }
