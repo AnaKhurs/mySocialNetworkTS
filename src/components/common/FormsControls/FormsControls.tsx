@@ -6,29 +6,29 @@ type PropsType = {
     meta: any
 }
 
-export const Textarea = ({input, meta, ...props}: PropsType) => {
-    const hasError = meta.touched && meta.error
+export const Textarea = ({input, meta: {touched, error}, ...props}: PropsType) => {
+    const hasError = touched && error
 
     return (
         <div className={classes.formControl + ' ' + (hasError ? classes.error : "")}>
             <div>
                 <textarea {...input} {...props}/>
             </div>
-            {hasError && <span>{meta.error}</span>}
+            {hasError && <span>{error}</span>}
 
         </div>
     )
 }
 
-export const Input = ({input, meta, ...props}: PropsType) => {
-    const hasError = meta.touched && meta.error
+export const Input = ({input, meta: {touched, error}, ...props}: PropsType) => {
+    const hasError = touched && error
 
     return (
         <div className={classes.formControl + ' ' + (hasError ? classes.error : "")}>
             <div>
                 <input {...input} {...props}/>
             </div>
-            {hasError && <span>{meta.error}</span>}
+            {hasError && <span>{error}</span>}
 
         </div>
     )
