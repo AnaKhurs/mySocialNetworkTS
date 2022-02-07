@@ -3,6 +3,7 @@ import classes from './Users.module.css'
 import userPhoto from './../../assets/images/abstract-user-flat-4.svg'
 import {UserType} from "../../redux/user-reducer";
 import {NavLink} from 'react-router-dom';
+import {Pagination} from "./Pagination";
 
 type PropsType = {
     totalUsersCount: number
@@ -16,21 +17,14 @@ type PropsType = {
 }
 
 export const Users = (props: PropsType) => {
-    const pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
-    const pages = [];
-    for (let i = 1; i <= pagesCount; i++) {
-        pages.push(i);
-    }
 
     return (
         <div>
-            <div>
-                {
-                    pages.map(p => <span
-                        onClick={() => props.onPageChanged(p)}
-                        className={props.currentPage === p ? classes.selectedPage : ''}>{p}</span>)
-                }
-            </div>
+            <Pagination totalUsersCount={props.totalUsersCount}
+                       currentPage={props.currentPage}
+                       onPageChanged={props.onPageChanged}
+                       pageSize={props.pageSize}/>
+
             {props.users.map(u => <div key={u.id}>
                     <span>
                        <div>
