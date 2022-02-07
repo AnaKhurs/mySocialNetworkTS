@@ -1,20 +1,12 @@
 import React from 'react';
 import './index.css';
-import App from './App';
+import {NetworkApp} from './App';
 import reportWebVitals from './reportWebVitals';
-import {StateType, store} from "./redux/redux-store"
-
 import ReactDOM from "react-dom";
-import {BrowserRouter} from "react-router-dom";
-import {Provider} from "react-redux";
 
 /*export const rerenderEntireTree = (state: StateType) => {*/
 ReactDOM.render(
-    <BrowserRouter>
-        <Provider store={store}>
-            <App/>
-        </Provider>
-    </BrowserRouter>,
+    <NetworkApp/>,
     document.getElementById('root')
 );
 /*}
