@@ -1,6 +1,6 @@
 import React, {Component, Suspense} from 'react';
 import './App.css';
-import {BrowserRouter, Route, withRouter} from "react-router-dom";
+import {HashRouter, Route, withRouter} from "react-router-dom";
 import Music from "./components/Music/Music";
 import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
@@ -70,9 +70,9 @@ const AppContainer = compose<React.ComponentType>(
     connect(mapStateToProps, {initializeApp}))(App)
 
 export const NetworkApp = () => {
-    return <BrowserRouter basename={process.env.PUBLIC_URL}>
+    return <HashRouter basename={process.env.PUBLIC_URL}>
         <Provider store={store}>
             <AppContainer/>
         </Provider>
-    </BrowserRouter>
+    </HashRouter>
 }
