@@ -44,24 +44,24 @@ const initialState = {
         {id: 3, message: "Yoooo", like: 10},
     ],
     profile: {
-        "aboutMe": null,
-        "contacts": {
-            "facebook": null,
-            "website": null,
-            "vk": null,
-            "twitter": null,
-            "instagram": null,
-            "youtube": null,
-            "github": null,
-            "mainLink": null
+        aboutMe: null,
+        contacts: {
+            facebook: null,
+            website: null,
+            vk: null,
+            twitter: null,
+            instagram: null,
+            youtube: null,
+            github: null,
+            mainLink: null
         },
-        "lookingForAJob": false,
-        "lookingForAJobDescription": null,
-        "fullName": "NAME",
-        "userId": 0,
-        "photos": {
-            "small": null,
-            "large": null
+        lookingForAJob: false,
+        lookingForAJobDescription: null,
+        fullName: "NAME",
+        userId: 0,
+        photos: {
+            small: null,
+            large: null
         }
     }
 }
@@ -81,6 +81,8 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
             return {...state, profile: action.profile}
         case "SET_USER_STATUS":
             return {...state, status: action.status}
+        case "SET_PHOTO_SUCCESS":
+            return  {...state, profile: {...state.profile, photos: action.photos}}
     }
     return state
 }
@@ -90,6 +92,7 @@ export type ActionTypeProfileReducer =
     | ReturnType<typeof setUserProfile>
     | ReturnType<typeof setUserStatus>
     | ReturnType<typeof deletePost>
+    | ReturnType<typeof setPhotoSuccess>
 
 
 export const addPost = (text: string) => {
@@ -120,6 +123,13 @@ export const setUserStatus = (status: string) => {
     } as const
 }
 
+export const setPhotoSuccess = (photos: any) => {
+    return ({
+        type: "SET_PHOTO_SUCCESS",
+        photos
+    } as const)
+}
+
 export const getUserProfile = (userId: string) => async (dispatch: Dispatch) => {
     const response = await profileAPI.getProfile(userId)
     dispatch(setUserProfile(response.data))
@@ -136,5 +146,13 @@ export const updateUserStatus = (status: string) => async (dispatch: Dispatch) =
         dispatch(setUserStatus(status))
     }
 }
+
+export const savePhoto = (file: File) => async (dispatch: Dispatch) => {
+    const response = await profileAPI.savePhoto(file)
+    if (response.data.resultCode === 0) {
+        dispatch(setPhotoSuccess(response.data.data.photos))
+    }
+}
+
 
 

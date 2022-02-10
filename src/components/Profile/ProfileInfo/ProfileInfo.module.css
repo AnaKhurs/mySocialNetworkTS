@@ -1,3 +1,7 @@
+/*.pageProfileInfo{
+    display: grid;
+
+}*/
 
 .profileImg img {
     width: 100%;
@@ -7,7 +11,9 @@
     padding: 10px;
     display: flex;
 }
-
+.photo{
+    display: grid;
+}
 .avaProfile{
     width: 200px;
     height: 200px;
@@ -25,3 +31,4 @@
 .contact{
 
 }
+

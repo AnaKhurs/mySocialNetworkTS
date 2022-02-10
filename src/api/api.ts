@@ -37,8 +37,15 @@ export const profileAPI = {
         return instance.get<string>(`/profile/status/` + userId)
     },
     updateStatus(status: string) {
-        return instance.put<string, AxiosResponse<ResponseType>>('/profile/status', {
-            status
+        return instance.put<string, AxiosResponse<ResponseType>>('/profile/status', {status})
+    },
+    savePhoto(file: File) {
+        const formData = new FormData()
+        formData.append("image", file)
+        return instance.put<File, AxiosResponse<ResponseType<{ photos: PhotosResponseType }>>>('/profile/photo', formData, {
+            headers: {
+                "Content-Type": "multipart/form-data"
+            }
         })
     }
 }
@@ -63,4 +70,9 @@ export type ResponseType<D = {}> = {
     resultCode: number
     messages: Array<string>
     data: D
+}
+
+type PhotosResponseType = {
+    small: string
+    large: string
 }

@@ -6,7 +6,7 @@ import {
     addPost,
     getUserProfile,
     getUserStatus,
-    PostType,
+    PostType, savePhoto,
     updateUserStatus,
     UserProfileDataType
 } from "../../redux/profile-reducer";
@@ -28,6 +28,7 @@ type MapDispatchToPropsType = {
     getUserProfile: (userId: string) => void
     getUserStatus: (userId: string) => void
     updateUserStatus: (status: string) => void
+    savePhoto: () => void
 }
 type PathParamsType = {
     userId: string
@@ -39,12 +40,12 @@ export type UserPropsType = MapStareToPropsType & MapDispatchToPropsType
 
 class ProfileContainer extends React.Component<PropsType> {
 
-    componentDidMount() {
+    refreshProfile() {
         let userId = this.props.match.params.userId
         if (!userId) {
-           // userId = "21108"
+            // userId = "21108"
             userId = String(this.props.authorized)
-            if (!userId){
+            if (!userId) {
                 this.props.history.push('/login')
             }
         }
@@ -52,11 +53,24 @@ class ProfileContainer extends React.Component<PropsType> {
         this.props.getUserStatus(userId)
     }
 
+    componentDidMount() {
+        this.refreshProfile()
+    }
+
+    componentDidUpdate(prevProps: Readonly<PropsType>, prevState: Readonly<{}>, snapshot?: any) {
+        if (this.props.match.params.userId !== prevProps.match.params.userId) {
+            this.refreshProfile()
+        }
+
+    }
+
     render() {
         return <Profile {...this.props}
+                        isOwner={!this.props.match.params.userId}
                         profile={this.props.profile}
                         status={this.props.status}
                         updateUserStatus={this.props.updateUserStatus}
+                        savePhoto={this.props.savePhoto}
         />
     }
 }
@@ -78,6 +92,7 @@ export default compose<ComponentType>(
         addPost,
         getUserProfile,
         getUserStatus,
-        updateUserStatus
+        updateUserStatus,
+        savePhoto,
     }),
     withRouter)(ProfileContainer)

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 import classes from './ProfileInfo.module.css'
 import {UserProfileDataType} from "../../../redux/profile-reducer";
 import userPhoto from './../../../assets/images/abstract-user-flat-4.svg'
@@ -9,6 +9,8 @@ type PropsType = {
     profile: UserProfileDataType
     status: string
     updateUserStatus: (status: string) => void
+    isOwner: boolean
+    savePhoto: (file: File) => void
 }
 
 
@@ -16,14 +18,26 @@ export const ProfileInfo = (props: PropsType) => {
     if (!props.profile) {
         return <Preloader/>
     }
+
+    const onMainPhotoSelected = (e: ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files) {
+            props.savePhoto(e.target.files[0])
+        }
+
+    }
+
     return (
-        <div>
+        <div className={classes.pageProfileInfo}>
             {/*  <div className={classes.profileImg}>
                 <img src='https://www.tourdom.ru/upload/iblock/c67/c67d37818296f908f1ba70503667e48c.jpeg'/>
             </div>*/}
             <div className={classes.description}>
-                <img className={classes.avaProfile}
-                     src={props.profile.photos.large ? props.profile.photos.large : userPhoto}/>
+                <div className={classes.photo}>
+                    <img className={classes.avaProfile}
+                         src={props.profile.photos.large || userPhoto}/>
+                    {props.isOwner && <input type={"file"} onChange={onMainPhotoSelected}/>}
+                </div>
+
                 <div className={classes.infoProfile}>
                     <div className={classes.name}>{props.profile.fullName}</div>
 
@@ -50,3 +64,12 @@ export const ProfileInfo = (props: PropsType) => {
         </div>
     )
 }
+
+
+// lastModified: 1644420533593
+// lastModifiedDate: Wed Feb 09 2022 18:28:53 GMT+0300 (Москва, стандартное время) {}
+// name: "0896ab7512a5ffe598fe2440cb2f1e4a.jpeg"
+// size: 24012
+// type: "image/jpeg"
+// webkitRelativePath: ""
+//     [[Prototype]]: File
