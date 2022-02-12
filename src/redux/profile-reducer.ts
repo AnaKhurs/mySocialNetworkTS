@@ -1,5 +1,5 @@
 import {Dispatch} from "redux";
-import {profileAPI, userAPI} from "../api/api";
+import {profileAPI} from "../api/api";
 
 export type PostType = {
     id: number
@@ -12,28 +12,28 @@ export type ProfilePageType = {
     profile: UserProfileDataType
     status: string
 }
-type ContactsType = {
-    "facebook": null | string
-    "website": null | string
-    "vk": null | string
-    "twitter": null | string
-    "instagram": null | string
-    "youtube": null | string
-    "github": null | string
-    "mainLink": null | string
+export type ContactsType = {
+    facebook: null | string
+    website: null | string
+    vk: null | string
+    twitter: null | string
+    instagram: null | string
+    youtube: null | string
+    github: null | string
+    mainLink: null | string
 }
 type PhotosType = {
-    "small": null | string
-    "large": null | string
+    small: null | string
+    large: null | string
 }
 export type UserProfileDataType = {
-    "aboutMe": null | string
-    "contacts": ContactsType
-    "lookingForAJob": boolean
-    "lookingForAJobDescription": null | string
-    "fullName": null | string
-    "userId": number
-    "photos": PhotosType
+    aboutMe: null | string
+    contacts: ContactsType
+    lookingForAJob: boolean
+    lookingForAJobDescription: null | string
+    fullName: null | string
+    userId: number
+    photos: PhotosType
 }
 
 const initialState = {
@@ -82,7 +82,7 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
         case "SET_USER_STATUS":
             return {...state, status: action.status}
         case "SET_PHOTO_SUCCESS":
-            return  {...state, profile: {...state.profile, photos: action.photos}}
+            return {...state, profile: {...state.profile, photos: action.photos}}
     }
     return state
 }

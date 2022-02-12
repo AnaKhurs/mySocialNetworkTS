@@ -7,28 +7,38 @@
     width: 100%;
 }
 
-.description{
+.description {
     padding: 10px;
     display: flex;
 }
-.photo{
+
+.photo {
     display: grid;
 }
-.avaProfile{
+
+.avaProfile {
     width: 200px;
     height: 200px;
 }
-.infoProfile{
+
+.infoProfile {
     padding-left: 10px;
 }
-.name{
+
+.name {
     font-weight: bold;
 }
-.aboutMe{
+
+.aboutMe {
     padding-top: 5px;
 }
 
-.contact{
+.contact {
+    font-weight: 500;
+}
 
+.span {
+    font-weight: 400;
+    color: seagreen;
 }
 

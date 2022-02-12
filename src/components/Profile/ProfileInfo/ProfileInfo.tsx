@@ -4,6 +4,8 @@ import {UserProfileDataType} from "../../../redux/profile-reducer";
 import userPhoto from './../../../assets/images/abstract-user-flat-4.svg'
 import {Preloader} from "../../common/Preloader/Preloader";
 import {ProfileStatus} from "./ProfileStatus/ProfileStatus";
+import {Contacts} from './Contacts/Contacts';
+import {ContactsType} from "./../../../redux/profile-reducer";
 
 type PropsType = {
     profile: UserProfileDataType
@@ -12,7 +14,6 @@ type PropsType = {
     isOwner: boolean
     savePhoto: (file: File) => void
 }
-
 
 export const ProfileInfo = (props: PropsType) => {
     if (!props.profile) {
@@ -23,7 +24,6 @@ export const ProfileInfo = (props: PropsType) => {
         if (e.target.files) {
             props.savePhoto(e.target.files[0])
         }
-
     }
 
     return (
@@ -43,33 +43,32 @@ export const ProfileInfo = (props: PropsType) => {
 
                     <ProfileStatus status={props.status} updateUserStatus={props.updateUserStatus}/>
 
-                    <hr></hr>
-                    <div className={classes.aboutMe}>aboutMe: {props.profile.aboutMe}</div>
-                    <hr></hr>
+                    <hr/>
                     <div className={classes.contact}>
-                        <div>facebook: {props.profile.contacts.facebook}</div>
-                        <div>website: {props.profile.contacts.website}</div>
-                        <div>vk: {props.profile.contacts.vk}</div>
-                        <div>twitter: {props.profile.contacts.twitter}</div>
-                        <div>instagram: {props.profile.contacts.instagram}</div>
-                        <div>youtube: {props.profile.contacts.youtube}</div>
-                        <div>github: {props.profile.contacts.github}</div>
-                        <div>mainLink: {props.profile.contacts.mainLink}</div>
+                        <div className={classes.fullName}>FullName</div>
+                        <div>
+                            Looking for a job:
+                            <span className={classes.span}>{props.profile.lookingForAJob ? " Yes " : " No "}</span>
+                        </div>
+                        {props.profile.lookingForAJob &&
+                        <div className={classes.contact}>
+                            My professional skills:
+                            <span className={classes.span}>{props.profile.lookingForAJobDescription}</span></div>
+                        }
+
                     </div>
-                    {/*                    <div className={classes.lookingForAJo}>lookingForAJob</div>
-                    <div className={classes.lookingForAJobDescription}>lookingForAJobDescription</div>
-                    <div className={classes.fullName}>fullName</div>*/}
+                    <hr/>
+                    <div className={classes.contact}>aboutMe:
+                        <span className={classes.span}>{props.profile.aboutMe}</span></div>
+                    <hr/>
+                    {Object.keys(props.profile.contacts).map((el) => {
+                        return (
+                            <Contacts key={el}
+                                      contactTitle={el}
+                                      contactValue={props.profile.contacts[el as keyof ContactsType]}/>)
+                    })}
                 </div>
             </div>
         </div>
     )
 }
-
-
-// lastModified: 1644420533593
-// lastModifiedDate: Wed Feb 09 2022 18:28:53 GMT+0300 (Москва, стандартное время) {}
-// name: "0896ab7512a5ffe598fe2440cb2f1e4a.jpeg"
-// size: 24012
-// type: "image/jpeg"
-// webkitRelativePath: ""
-//     [[Prototype]]: File
