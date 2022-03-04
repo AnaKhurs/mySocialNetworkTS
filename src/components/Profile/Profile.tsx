@@ -9,13 +9,19 @@ type ProfileType = {
     updateUserStatus: (status: string) => void
     isOwner: boolean
     savePhoto: () => void
+    saveProfile: () => void
 }
 
 export const Profile: React.FC<ProfileType> = (props) => {
     return (
         <div>
-            <ProfileInfo savePhoto={props.savePhoto} isOwner={props.isOwner} profile={props.profile}
-                         status={props.status} updateUserStatus={props.updateUserStatus}/>
+            <ProfileInfo savePhoto={props.savePhoto}
+                         isOwner={props.isOwner}
+                         profile={props.profile}
+                         status={props.status}
+                         updateUserStatus={props.updateUserStatus}
+                         saveProfile={props.saveProfile}
+            />
             <MyPostsContainer/>
         </div>
     )

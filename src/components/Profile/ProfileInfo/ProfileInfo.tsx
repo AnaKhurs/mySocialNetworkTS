@@ -1,11 +1,12 @@
-import React, {ChangeEvent} from 'react';
+import React, {ChangeEvent, useState} from 'react';
 import classes from './ProfileInfo.module.css'
 import {UserProfileDataType} from "../../../redux/profile-reducer";
 import userPhoto from './../../../assets/images/abstract-user-flat-4.svg'
 import {Preloader} from "../../common/Preloader/Preloader";
 import {ProfileStatus} from "./ProfileStatus/ProfileStatus";
-import {Contacts} from './Contacts/Contacts';
-import {ContactsType} from "./../../../redux/profile-reducer";
+import {ProfileData} from "./ProfileData/ProfileData";
+import {FormDataType, ProfileDataReduxForm} from "./ProfileDataForm/ProfileDataForm";
+
 
 type PropsType = {
     profile: UserProfileDataType
@@ -13,9 +14,14 @@ type PropsType = {
     updateUserStatus: (status: string) => void
     isOwner: boolean
     savePhoto: (file: File) => void
+    saveProfile: (formData: FormDataType) => void
 }
 
+
 export const ProfileInfo = (props: PropsType) => {
+
+    const [editMode, setEditMode] = useState(false)
+
     if (!props.profile) {
         return <Preloader/>
     }
@@ -26,11 +32,12 @@ export const ProfileInfo = (props: PropsType) => {
         }
     }
 
+    const onSubmit = (formData: FormDataType) => {
+        props.saveProfile(formData)
+    }
+
     return (
         <div className={classes.pageProfileInfo}>
-            {/*  <div className={classes.profileImg}>
-                <img src='https://www.tourdom.ru/upload/iblock/c67/c67d37818296f908f1ba70503667e48c.jpeg'/>
-            </div>*/}
             <div className={classes.description}>
                 <div className={classes.photo}>
                     <img className={classes.avaProfile}
@@ -40,33 +47,12 @@ export const ProfileInfo = (props: PropsType) => {
 
                 <div className={classes.infoProfile}>
                     <div className={classes.name}>{props.profile.fullName}</div>
-
                     <ProfileStatus status={props.status} updateUserStatus={props.updateUserStatus}/>
+                    <hr/>
+                    {editMode ? <ProfileDataReduxForm profile={props.profile} onSubmit={onSubmit}/> :
+                        <ProfileData profile={props.profile} isOwner={props.isOwner}
+                                     goToEditMode={() => setEditMode(true)}/>}
 
-                    <hr/>
-                    <div className={classes.contact}>
-                        <div className={classes.fullName}>FullName</div>
-                        <div>
-                            Looking for a job:
-                            <span className={classes.span}>{props.profile.lookingForAJob ? " Yes " : " No "}</span>
-                        </div>
-                        {props.profile.lookingForAJob &&
-                        <div className={classes.contact}>
-                            My professional skills:
-                            <span className={classes.span}>{props.profile.lookingForAJobDescription}</span></div>
-                        }
-
-                    </div>
-                    <hr/>
-                    <div className={classes.contact}>aboutMe:
-                        <span className={classes.span}>{props.profile.aboutMe}</span></div>
-                    <hr/>
-                    {Object.keys(props.profile.contacts).map((el) => {
-                        return (
-                            <Contacts key={el}
-                                      contactTitle={el}
-                                      contactValue={props.profile.contacts[el as keyof ContactsType]}/>)
-                    })}
                 </div>
             </div>
         </div>

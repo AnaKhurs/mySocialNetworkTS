@@ -47,6 +47,9 @@ export const profileAPI = {
                 "Content-Type": "multipart/form-data"
             }
         })
+    },
+    saveProfile(profile: UserProfileDataType) {
+        return instance.put<UserProfileDataType, AxiosResponse<ResponseType>>('/profile', profile)
     }
 }
 

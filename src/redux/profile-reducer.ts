@@ -83,6 +83,8 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
             return {...state, status: action.status}
         case "SET_PHOTO_SUCCESS":
             return {...state, profile: {...state.profile, photos: action.photos}}
+        case "SET_PROFILE_SUCCESS":
+            return {...state, profile: action.profile}
     }
     return state
 }
@@ -93,6 +95,7 @@ export type ActionTypeProfileReducer =
     | ReturnType<typeof setUserStatus>
     | ReturnType<typeof deletePost>
     | ReturnType<typeof setPhotoSuccess>
+    | ReturnType<typeof setProfileSuccess>
 
 
 export const addPost = (text: string) => {
@@ -130,6 +133,13 @@ export const setPhotoSuccess = (photos: any) => {
     } as const)
 }
 
+export const setProfileSuccess = (profile: any) => {
+    return ({
+        type: "SET_PROFILE_SUCCESS",
+        profile
+    } as const)
+}
+
 export const getUserProfile = (userId: string) => async (dispatch: Dispatch) => {
     const response = await profileAPI.getProfile(userId)
     dispatch(setUserProfile(response.data))
@@ -151,6 +161,14 @@ export const savePhoto = (file: File) => async (dispatch: Dispatch) => {
     const response = await profileAPI.savePhoto(file)
     if (response.data.resultCode === 0) {
         dispatch(setPhotoSuccess(response.data.data.photos))
+    }
+}
+
+export const saveProfile = (profile: UserProfileDataType) => async (dispatch: Dispatch) => {
+    debugger
+    const response = await profileAPI.saveProfile(profile)
+    if (response.data.resultCode === 0) {
+        dispatch(setProfileSuccess(profile))
     }
 }
 
