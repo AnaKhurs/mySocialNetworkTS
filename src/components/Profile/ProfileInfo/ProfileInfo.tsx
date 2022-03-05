@@ -34,6 +34,8 @@ export const ProfileInfo = (props: PropsType) => {
 
     const onSubmit = (formData: FormDataType) => {
         props.saveProfile(formData)
+        setEditMode(false)
+        //console.log(formData)
     }
 
     return (
@@ -49,10 +51,14 @@ export const ProfileInfo = (props: PropsType) => {
                     <div className={classes.name}>{props.profile.fullName}</div>
                     <ProfileStatus status={props.status} updateUserStatus={props.updateUserStatus}/>
                     <hr/>
-                    {editMode ? <ProfileDataReduxForm profile={props.profile} onSubmit={onSubmit}/> :
-                        <ProfileData profile={props.profile} isOwner={props.isOwner}
-                                     goToEditMode={() => setEditMode(true)}/>}
-
+                    {editMode
+                        ? <ProfileDataReduxForm initialValues={props.profile}
+                                                profile={props.profile}
+                                                onSubmit={onSubmit}
+                        />
+                        : <ProfileData profile={props.profile}
+                                       isOwner={props.isOwner}
+                                       goToEditMode={setEditMode}/>}
                 </div>
             </div>
         </div>

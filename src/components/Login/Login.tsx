@@ -12,9 +12,9 @@ const Login1 = (props: LoginPropsType) => {
         props.login(formData.email, formData.password, formData.rememberMe)
     }
 
-        if(props.isAuth){
-            return <Redirect to={"/profile"}/>
-        }
+    if (props.isAuth) {
+        return <Redirect to={"/profile"}/>
+    }
 
     return (
         <div>

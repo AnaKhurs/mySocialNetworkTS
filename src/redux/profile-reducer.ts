@@ -27,11 +27,11 @@ type PhotosType = {
     large: null | string
 }
 export type UserProfileDataType = {
-    aboutMe: null | string
+    aboutMe: string
     contacts: ContactsType
     lookingForAJob: boolean
-    lookingForAJobDescription: null | string
-    fullName: null | string
+    lookingForAJobDescription: string
+    fullName: string
     userId: number
     photos: PhotosType
 }
@@ -44,7 +44,7 @@ const initialState = {
         {id: 3, message: "Yoooo", like: 10},
     ],
     profile: {
-        aboutMe: null,
+        aboutMe: '',
         contacts: {
             facebook: null,
             website: null,
@@ -56,7 +56,7 @@ const initialState = {
             mainLink: null
         },
         lookingForAJob: false,
-        lookingForAJobDescription: null,
+        lookingForAJobDescription: '',
         fullName: "NAME",
         userId: 0,
         photos: {
@@ -84,7 +84,7 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
         case "SET_PHOTO_SUCCESS":
             return {...state, profile: {...state.profile, photos: action.photos}}
         case "SET_PROFILE_SUCCESS":
-            return {...state, profile: action.profile}
+            return {...state, profile: {...state.profile, ...action.profile}}
     }
     return state
 }
@@ -165,7 +165,6 @@ export const savePhoto = (file: File) => async (dispatch: Dispatch) => {
 }
 
 export const saveProfile = (profile: UserProfileDataType) => async (dispatch: Dispatch) => {
-    debugger
     const response = await profileAPI.saveProfile(profile)
     if (response.data.resultCode === 0) {
         dispatch(setProfileSuccess(profile))

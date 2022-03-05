@@ -6,7 +6,7 @@ import {ContactsType, UserProfileDataType} from "../../../../redux/profile-reduc
 type PropsType = {
     profile: UserProfileDataType
     isOwner: boolean
-    goToEditMode: () => void
+    goToEditMode: (value: boolean) => void
 }
 
 export const ProfileData = (props: PropsType) => {
@@ -14,7 +14,7 @@ export const ProfileData = (props: PropsType) => {
         <div>
             {props.isOwner &&
             <div>
-                <button onClick={props.goToEditMode}>edit</button>
+                <button onClick={() => props.goToEditMode(true)}>edit</button>
             </div>}
             <div className={classes.contact}>
                 <div className={classes.fullName}>Full name:
