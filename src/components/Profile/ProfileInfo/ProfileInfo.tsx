@@ -35,7 +35,6 @@ export const ProfileInfo = (props: PropsType) => {
     const onSubmit = (formData: FormDataType) => {
         props.saveProfile(formData)
         setEditMode(false)
-        //console.log(formData)
     }
 
     return (

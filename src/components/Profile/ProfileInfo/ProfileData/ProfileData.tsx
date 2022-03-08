@@ -29,14 +29,11 @@ export const ProfileData = (props: PropsType) => {
                     My professional skills:
                     <span className={classes.span}>{props.profile.lookingForAJobDescription}</span></div>
                 }
-
             </div>
-
             <div className={classes.contact}>About me:
                 <span className={classes.span}>{props.profile.aboutMe}</span>
             </div>
             <hr/>
-
             {Object.keys(props.profile.contacts).map((el) => {
                 return (
                     <Contacts key={el}

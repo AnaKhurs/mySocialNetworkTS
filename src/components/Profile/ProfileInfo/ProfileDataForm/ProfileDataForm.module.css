@@ -7,3 +7,7 @@
     color: seagreen;
 }
 
+.error{
+    color: red;
+    font-weight: bold;
+}

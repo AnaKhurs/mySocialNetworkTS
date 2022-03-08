@@ -1,6 +1,5 @@
 import React from 'react';
 import classes from './ProfileDataForm.module.css'
-import {Contacts} from "../Contacts/Contacts";
 import {ContactsType, UserProfileDataType} from "../../../../redux/profile-reducer";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {Input, Textarea} from "../../../common/FormsControls/FormsControls";
@@ -15,17 +14,19 @@ export type FormDataType = {
     lookingForAJob: boolean
     lookingForAJobDescription: string
     aboutMe: string
-
+    contacts: ContactsType
 }
 
 
-const ProfileDataForm: React.FC<InjectedFormProps<FormDataType,PropsType> & PropsType> = (props) => {
+const ProfileDataForm: React.FC<InjectedFormProps<FormDataType, PropsType> & PropsType> = (props) => {
     return (
 
         <form onSubmit={props.handleSubmit}>
             <div>
-                {/*<button onClick={() => props.goToEditMode(false)}>save</button>*/}
                 <button>save</button>
+            </div>
+            <div className={classes.error}>
+                {props.error && <div className={classes.formCommonError}>{props.error}</div>}
             </div>
             <div className={classes.contact}>
 
@@ -69,9 +70,18 @@ const ProfileDataForm: React.FC<InjectedFormProps<FormDataType,PropsType> & Prop
 
             {Object.keys(props.profile.contacts).map((el) => {
                 return (
-                    <Contacts key={el}
-                              contactTitle={el}
-                              contactValue={props.profile.contacts[el as keyof ContactsType]}/>)
+                    <div key={el} className={classes.contacts}>
+                        <b>{el}:<Field placeholder={el}
+                                       name={"contacts." + el}
+                                       component={Input}/>
+                        </b>
+                    </div>
+
+                    /*     <Contacts key={el}
+                                   contactTitle={el}
+                                   contactValue={props.profile.contacts[el as keyof ContactsType]}/>
+                                   */
+                )
             })}
 
 
@@ -79,6 +89,6 @@ const ProfileDataForm: React.FC<InjectedFormProps<FormDataType,PropsType> & Prop
     )
 }
 
-export const ProfileDataReduxForm = reduxForm<FormDataType,PropsType>({
+export const ProfileDataReduxForm = reduxForm<FormDataType, PropsType>({
     form: 'edit-profile'
 })(ProfileDataForm)

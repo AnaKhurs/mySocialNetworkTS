@@ -1,5 +1,7 @@
 import {Dispatch} from "redux";
 import {profileAPI} from "../api/api";
+import {StateType} from "./redux-store";
+import {stopSubmit} from "redux-form";
 
 export type PostType = {
     id: number
@@ -13,14 +15,14 @@ export type ProfilePageType = {
     status: string
 }
 export type ContactsType = {
-    facebook: null | string
-    website: null | string
-    vk: null | string
-    twitter: null | string
-    instagram: null | string
-    youtube: null | string
-    github: null | string
-    mainLink: null | string
+    facebook: string
+    website: string
+    vk: string
+    twitter: string
+    instagram: string
+    youtube: string
+    github: string
+    mainLink: string
 }
 type PhotosType = {
     small: null | string
@@ -39,25 +41,25 @@ export type UserProfileDataType = {
 const initialState = {
     status: '',
     posts: [
-        {id: 1, message: "Hi, how are you?", like: 18},
-        {id: 2, message: "It is my first post!!!", like: 19},
-        {id: 3, message: "Yoooo", like: 10},
+        {id: 1, message: 'Hi, how are you?', like: 18},
+        {id: 2, message: 'It is my first post!!!', like: 19},
+        {id: 3, message: 'Yoooo', like: 10},
     ],
     profile: {
         aboutMe: '',
         contacts: {
-            facebook: null,
-            website: null,
-            vk: null,
-            twitter: null,
-            instagram: null,
-            youtube: null,
-            github: null,
-            mainLink: null
+            facebook: '',
+            website: '',
+            vk: '',
+            twitter: '',
+            instagram: '',
+            youtube: '',
+            github: '',
+            mainLink: ''
         },
         lookingForAJob: false,
         lookingForAJobDescription: '',
-        fullName: "NAME",
+        fullName: '',
         userId: 0,
         photos: {
             small: null,
@@ -114,28 +116,28 @@ export const deletePost = (id: number) => {
 
 export const setUserProfile = (profile: UserProfileDataType) => {
     return {
-        type: "SET_USER_PROFILE",
+        type: 'SET_USER_PROFILE',
         profile
     } as const
 }
 
 export const setUserStatus = (status: string) => {
     return {
-        type: "SET_USER_STATUS",
+        type: 'SET_USER_STATUS',
         status
     } as const
 }
 
 export const setPhotoSuccess = (photos: any) => {
     return ({
-        type: "SET_PHOTO_SUCCESS",
+        type: 'SET_PHOTO_SUCCESS',
         photos
     } as const)
 }
 
-export const setProfileSuccess = (profile: any) => {
+export const setProfileSuccess = (profile: UserProfileDataType) => {
     return ({
-        type: "SET_PROFILE_SUCCESS",
+        type: 'SET_PROFILE_SUCCESS',
         profile
     } as const)
 }
@@ -164,10 +166,15 @@ export const savePhoto = (file: File) => async (dispatch: Dispatch) => {
     }
 }
 
-export const saveProfile = (profile: UserProfileDataType) => async (dispatch: Dispatch) => {
+export const saveProfile = (profile: UserProfileDataType) => async (dispatch: Dispatch, getState: () => StateType) => {
+    /*    const userId = String(getState().auth.data?.id)*/
     const response = await profileAPI.saveProfile(profile)
     if (response.data.resultCode === 0) {
+        /*         dispatch(getUserProfile(userId))*/
         dispatch(setProfileSuccess(profile))
+    } else {
+        dispatch(stopSubmit("edit-profile", {_error: response.data.messages[0]}))
+        /*return Promise.reject(response.data.messages[0])*/
     }
 }
 
