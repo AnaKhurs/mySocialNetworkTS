@@ -1,6 +1,7 @@
 import axios, {AxiosResponse} from "axios";
 import {UserProfileDataType} from "../redux/profile-reducer";
 import {DataTypeAuthMe} from "../redux/auth-reducer";
+import * as url from "url";
 
 const instance = axios.create(
     {
@@ -57,17 +58,25 @@ export const userAuthAPI = {
     getAuthMe() {
         return instance.get<ResponseType<DataTypeAuthMe>>(`auth/me`)
     },
-    logIn(email: string, password: string, rememberMe: boolean) {
+    logIn(email: string, password: string, rememberMe: boolean, captcha: string) {
         return instance.post<{ userId: number }, AxiosResponse<ResponseType<{ userId: number }>>>(`auth/login`, {
             email,
             password,
-            rememberMe
+            rememberMe,
+            captcha,
         })
     },
     logOut() {
         return instance.delete<ResponseType>(`auth/login`)
     },
 }
+
+export const securityAPI = {
+    getCaptchaUrl() {
+        return instance.get<{ url: string }>(`security/get-captcha-url`)
+    },
+}
+
 
 export type ResponseType<D = {}> = {
     resultCode: number

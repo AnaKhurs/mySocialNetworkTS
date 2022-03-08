@@ -8,18 +8,22 @@ export type FormDataType = {
     email: string
     password: string
     rememberMe: boolean
+    captcha: string
+}
+
+type PropsType = {
+    captchaUrl: string
 }
 
 
-const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
+const LoginForm: React.FC<InjectedFormProps<FormDataType, PropsType> & PropsType> = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
                 <Field component={Input}
                        validate={[required]}
                        placeholder={"email"}
-                       name={"email"}
-                />
+                       name={"email"}/>
             </div>
             <div>
                 <Field component={Input}
@@ -31,6 +35,16 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
             <div>
                 <Field component={"input"} type={"checkbox"} name={"rememberMe"}/>Remember me
             </div>
+
+            {props.captchaUrl && <img src={props.captchaUrl}/>}
+            {props.captchaUrl &&
+            <div>
+                <Field component={Input}
+                       validate={[required]}
+                       placeholder={"captcha"}
+                       name={"captcha"}/>
+            </div>}
+
             {props.error && <div className={classes.formCommonError}>{props.error}</div>}
             <div>
                 <button>Login</button>
@@ -40,4 +54,4 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
 
 }
 
-export const LoginReduxForm = reduxForm<FormDataType>({form: "Login"})(LoginForm)
+export const LoginReduxForm = reduxForm<FormDataType, PropsType>({form: "Login"})(LoginForm)
