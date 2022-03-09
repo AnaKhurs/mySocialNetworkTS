@@ -1,7 +1,6 @@
 import axios, {AxiosResponse} from "axios";
 import {UserProfileDataType} from "../redux/profile-reducer";
 import {DataTypeAuthMe} from "../redux/auth-reducer";
-import * as url from "url";
 
 const instance = axios.create(
     {
